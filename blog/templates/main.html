@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--    static files links-->
+    <link rel="stylesheet" href="{% static 'posts/css/main.css' %}">
+    <script src="{% static 'posts/js/main.js' %}"></script>
+
+    <!-- font-awesome cdn  -->
+    <script src="https://kit.fontawesome.com/de0476f8c8.js" crossorigin="anonymous"></script>
+
+    <title>{% block title %}Landing Page{% endblock %}</title>
+    <style>
+        {% block designing %} {% endblock %}
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="flex justify-between flex-wrap sticky top-0 md:static items-center w-full px-2 py-0">
+            <div class="hidden md:flex">
+                <!-- empty div just to make flex justify-between to work fine -->
+                <!-- so that logo will be in center  -->
+            </div>
+            <!-- nav icon for small screen -->
+            <div class="block md:hidden">
+                <button class="drawer-btn flex items-center px-3 py-2 text-gray-600 hover:text-black duration-500 ease-out">
+                    <svg class="pointer-events-none fill-current h-5 w-5" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <title>Menu</title>
+                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- website logo -->
+            <span class="font-semibold font-sans text-3xl text-indigo-600 tracking-tight">
+                SmartEngine.<span class="font-semibold text-xl tracking-tight">com</span>
+            </span>
+
+            <!-- START social-media-links and language -->
+            <div class="grid grid-cols-2 gap-2 divide-x divide-gray-400 items-center py-1">
+                <!-- social media grid  -->
+                <div class="grid grid-cols-2 gap-1">
+                    <div title="Facebook" class="">
+                        <a href="http://facebook.com" target="_blank" rel="noopener noreferrer nofollowed" class="focus:outline-none">
+                            <i
+                                class="fab fa-facebook-square text-xl text-gray-600 hover:text-gray-800 duration-500"></i>
+                        </a>
+                    </div>
+                    <div title="Instagram" class="">
+                        <a href="http://instagram.com" target="_blank" rel="noopener noreferrer nofollowed" class="focus:outline-none">
+                            <i
+                                class="fab fa-instagram-square text-xl text-gray-600 hover:text-gray-800 duration-500"></i>
+                        </a>
+                    </div>
+                    <div title="Twitter" class="">
+                        <a href="http://twitter.com" target="_blank" rel="noopener noreferrer nofollowed" class="focus:outline-none">
+                            <i class="fab fa-twitter-square text-xl text-gray-600 hover:text-gray-800 duration-500"></i>
+                        </a>
+                    </div>
+                    <div title="YouTube" class="">
+                        <a href="http://youtube.com" target="_blank" rel="noopener noreferrer nofollowed" class="focus:outline-none">
+                            <i class="fab fa-youtube-square text-xl text-gray-600 hover:text-gray-800 duration-500"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- language toggle grid  -->
+<!--                <div class="grid grid-cols-1 gap-1 items-center pl-2">-->
+
+<!--                    <div title="Read in English" class="cursor-pointer text-gray-600 hover:text-gray-900 duration-300">-->
+<!--                        EN</div>-->
+<!--                    <div title="हिंदी में पढ़े" class="cursor-pointer text-gray-600 hover:text-gray-900 duration-300">हि-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+            <!-- END social-media-links and language -->
+        </nav>
+
+        <hr class="h-0">
+    </header>
+
+    <main>
+        <!-- second navigation (hidden for sm, ml screen) -> for menu items  -->
+        <nav class="second-nav hidden relative px-2 py-2 md:flex md:justify-between">
+            <button class="drawer-btn flex items-center px-3 py-2 text-gray-600 hover:text-black focus:outline-none duration-500 ease-out">
+                <svg class="pointer-events-none fill-current h-5 w-5" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <title>Menu</title>
+                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                </svg>
+            </button>
+            <ul class="main-navigation clear-dropdown flex justify-center md:transform md:-translate-x-16">
+                <li class="mr-6 transform hover:scale-110 duration-700 focus:outline-none">
+                    <a class="text-xl focus:outline-none" href="{% url 'posts:landingpage' %}">
+                        <i class="fas fa-home text-gray-800 hover:text-indigo-600"></i>
+                    </a>
+                </li>
+                <li class="mr-6 transform hover:scale-110 duration-700 ">
+                    <a class="text-gray-800 text-xl font-semibold active:text-indigo-600 hover:text-indigo-600 focus:outline-none" href="#">Today's Hot</a>
+                </li>
+                <li class="mr-6 transform hover:scale-110 duration-700">
+                    <a class="text-gray-800 text-xl font-semibold hover:text-indigo-600 focus:outline-none" href="#">Box Office</a>
+                </li>
+                <li class="mr-6 transform hover:scale-110 duration-700">
+                    <a class="text-gray-800 text-xl font-semibold hover:text-indigo-600 focus:outline-none" href="#">Top 10</a>
+                </li>
+                <!-- dropdown menu for movies  -->
+                <li class="movie-dropdown-menu mr-6">
+                    <a class="text-gray-800 text-xl font-semibold hover:text-indigo-600 cursor-pointer focus:outline-none">Movies 
+                            <span class="text-black font-normal">&#43;</span></a>
+                    <ul class="drop-down-menu-movie clear-dropdown rounded list-none hidden p-0 m-0 bg-indigo-500">
+                        <li
+                            class="latest-release-list cursor-pointer py-1 px-4 text-center text-white hover:bg-indigo-300 duration-500">
+                            <a href="#" class="block whitespace-no-wrap transform hover:scale-110 duration-500 focus:outline-none">Latest Release</a></li>
+                        <li
+                            class="coming-movie-list cursor-pointer py-1 px-4 text-center text-white hover:bg-indigo-300 duration-500">
+                            <a href="#" class="block whitespace-no-wrap transform hover:scale-110 duration-500 focus:outline-none">Upcoming Movies</a></li>
+                    </ul>
+                </li>
+                <!-- dropdown menu for more  -->
+                <li class="movie-dropdown-menu mr-6">
+                    <a class="text-gray-800 text-xl font-semibold hover:text-indigo-600" href="#">More <span class="text-black font-normal">&#43;</span></a>
+                    <ul class="drop-down-menu-movie clear-dropdown rounded list-none hidden p-0 m-0 bg-indigo-500">
+                        <li
+                            class="coming-movie-list cursor-pointer py-1 px-4 text-center text-white hover:bg-indigo-300 duration-300">
+                            <a href="#" class="block whitespace-no-wrap transform hover:scale-110 duration-500 focus:outline-none">Gossip</a></li>
+                        <li
+                            class="coming-movie-list cursor-pointer py-1 px-4 text-center text-white hover:bg-indigo-300 duration-300">
+                            <a href="#" class="block whitespace-no-wrap transform hover:scale-110 duration-500 focus:outline-none">Television</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div>
+                <!-- empty div just to make flex justify-between to work fine -->
+                <!-- so that second Navbar will be in center  -->
+            </div>
+        </nav>
+        <hr>
+        <!-- drawer for nav  -->
+        <div class="drawer-container fixed top-0 left-6 w-1/2 md:w-1/4 h-full bg-white px-4 z-20">
+            <div class="flex justify-between w-full px-0 py-2">
+                <!-- website logo -->
+                <span class="font-semibold font-sans text-2xl text-indigo-600 tracking-tight">
+                    NewsPortal.<span class="font-semibold text-xl tracking-tight">com</span>
+                </span>
+                <!-- cross sign to close side nav  -->
+                <span class="drawer-close-symbol cursor-pointer text-gray-600 hover:text-black duration-500 ease-out">&#10005;</span>
+            </div>
+            <hr class="h-1">
+            
+            <ul class="main-navigation clear-dropdown">
+                <li class="py-2 transform hover:translate-x-1 duration-500">
+                    <a class="text-gray-600 font-bold hover:text-gray-900 focus:outline-none duration-200" href="#">
+                        Home
+                    </a>
+                </li>
+                <hr class="h-1">
+
+                <li class="py-2 transform hover:translate-x-1 duration-500">
+                    <a class="text-gray-600 font-bold hover:text-gray-900 duration-200 focus:outline-none" href="#">Today's Hot</a>
+                </li>
+                <hr class="h-1">
+
+                <li class="py-2 transform hover:translate-x-1 duration-500">
+                    <a href="#" class="whitespace-no-wrap cursor-pointer text-gray-600 font-bold hover:text-gray-900 duration-200 focus:outline-none">Latest Release</a></li>
+                <hr class="h-1">
+
+                <li class="py-2 transform hover:translate-x-1 duration-500"><a href="#"
+                        class="whitespace-no-wrap cursor-pointer text-gray-600 font-bold hover:text-gray-900 duration-200 focus:outline-none">Upcoming Movies</a></li>
+                <hr class="h-1">
+
+                <li class="py-2 transform hover:translate-x-1 duration-500">
+                    <a class="whitespace-no-wrap cursor-pointer text-gray-600 font-bold hover:text-gray-900 duration-200 focus:outline-none" href="#">Box Office</a>
+                </li>
+                <hr class="h-1">
+
+                <li class="py-2 transform hover:translate-x-1 duration-500">
+                    <a href="#" class="whitespace-no-wrap cursor-pointer text-gray-600 font-bold hover:text-gray-900 duration-200 focus:outline-none">TOP 10</a></li>
+                <hr class="h-1">
+
+                <li class="py-2 transform hover:translate-x-1 duration-500">
+                    <a href="#" class="whitespace-no-wrap cursor-pointer text-gray-600 font-bold hover:text-gray-900 duration-200 focus:outline-none">Gossip</a></li>
+                <hr class="h-1">
+
+                <li class="py-2 transform hover:translate-x-1 duration-500"><a href="#"
+                        class="whitespace-no-wrap cursor-pointer text-gray-600 font-bold hover:text-gray-900 duration-200 focus:outline-none">Television</a></li>
+                <hr class="h-1">
+            </ul>
+        </div>
+        <!-- works as overlay when drawer is on-->
+        <div class="drawer-overlay fixed top-0 left-0 w-full h-full bg-black opacity-25 z-10"></div>
+
+        {% block body %}{% endblock %}
+
+        <!-- footer starts -->
+        <footer class="main-footer md:text-start w-full leading-relaxed bg-gray-800 pt-16 pb-5">
+            <!-- footer top section container -->
+            <div class="footer-container md:flex justify-between md:justify-around px-2 pb-12">
+                <!-- <div class="fb-iframe w-1/4 hidden ">
+                    this space is for facebook iframe
+                </div> -->
+
+                <!-- right part of footer sub-container contents -->
+                <div class="footer-link-container text-white md:w-1/3">
+                    <h1 class="footer-header inline relative text-xl pb-1 text-gray-100">About Us</h1>
+                    <p class="mt-4 mb-10 text-gray-600">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Id porro eligendi, vel, quasi, possimus harum tempore reiciendis voluptatibus tempora pariatur suscipit. Laboriosam aliquam quaerat unde eveniet quos hic nobis non.
+                    </p>
+                    <!-- quicklinks and important section  -->
+                    <div class="footer-link-section md:flex justify-between mt-10">
+                        <div>
+                            <h1 class="footer-header inline relative text-xl pb-1 text-gray-100">Quick Links</h1>
+                            <ul class="mt-4 mb-10 font-thin text-gray-600 leading-loose">
+                                <li class="cursor-pointer hover:text-gray-500 duration-200">Home</li>
+                                <li class="cursor-pointer hover:text-gray-500 duration-200">Contact us</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h1 class="footer-header inline relative text-xl pb-1 text-gray-100">Important</h1>
+                            <ul class="mt-4 mb-10 font-thin text-gray-600 leading-loose">
+                                <li class="cursor-pointer hover:text-gray-500 duration-200">Privacy &amp; Cookies</li>
+                                <li class="cursor-pointer hover:text-gray-500 duration-200">Terms &amp; Conditions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- sitemap -->
+                <div class="footer-site-map text-white">
+                    <h1 class="footer-header inline relative text-xl pb-1 text-gray-100">Site Map</h1>
+                    <ul class="mt-4 mb-10 font-thin text-gray-600 leading-loose">
+                        <li class="cursor-pointer hover:text-gray-500 duration-200">Today's Hot</li>
+                        <li class="cursor-pointer hover:text-gray-500 duration-200">Latest Release</li>
+                        <li class="cursor-pointer hover:text-gray-500 duration-200">Upcoming Movies</li>
+                        <li class="cursor-pointer hover:text-gray-500 duration-200">Box office</li>
+                        <li class="cursor-pointer hover:text-gray-500 duration-200">Box office</li>
+                        <li class="cursor-pointer hover:text-gray-500 duration-200">TOP 10</li>
+                        <li class="cursor-pointer hover:text-gray-500 duration-200">Gossip</li>
+                        <li class="cursor-pointer hover:text-gray-500 duration-200">Television</li>
+                    </ul>
+                </div>
+                <!-- social media links  -->
+                <div class="footer-social-media text-white">
+                    <h1 class="footer-header inline relative text-xl pb-1 text-gray-100">Find Us on</h1>
+                    <ul class="mt-4 font-thin text-gray-600 md:text-gray-400 leading-loose">
+                        <li class="cursor-pointer hover:text-gray-500 duration-200">Facebook</li>
+                        <li class="cursor-pointer hover:text-gray-500 duration-200">Instagram</li>
+                        <li class="cursor-pointer hover:text-gray-500 duration-200">Twitter</li>
+                        <li class="cursor-pointer hover:text-gray-500 duration-200">YouTube</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- copyright section  for footer -->
+            <div class="footer-bottom text-center text-gray-600 font-thin py-3">
+                &copy; 2020 NewsPortal.com | All rights reserved
+                <p class="text-xs">Design and Developed by <span class="text-gray-500">Gaurav Jaiswal</span></p>
+            </div>
+        </footer>
+    </main>
+</body>
+</html>

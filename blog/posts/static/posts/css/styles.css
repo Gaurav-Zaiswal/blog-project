@@ -1,0 +1,32 @@
+@import "tailwindcss/base";
+
+@import "tailwindcss/components";
+
+/* index page starts */
+.movie-dropdown-menu:hover > ul{
+    @apply absolute block;
+} 
+
+.movie-dropdown-menu:hover li{
+    @apply float-none;
+}
+
+.main-navigation li ul li{
+    @apply border-t-0;
+}
+
+.clear-dropdown::after{
+    @apply clear-both;
+}
+
+.footer-header::before{
+    content: "";
+    position: absolute;
+    width: 60%;
+    height: 1px;
+    bottom: 0;  
+    border-bottom: 2px solid rgb(228, 41, 181);
+}
+
+
+@import "tailwindcss/utilities";
