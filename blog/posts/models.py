@@ -25,6 +25,7 @@ now = timezone.now()
 
 
 def thumbnail_path(instance, filename):
+    today = datetime.datetime.now()
     # checks jpg exttension
     extension = filename.split('.')[1]
     if len(filename.split('.')) != 2:
@@ -32,7 +33,7 @@ def thumbnail_path(instance, filename):
     if not extension in ['jpg', 'jpeg']:
         raise TypeError("we currently accept jpg/jpeg formats only.")
     unique_name = uuid.uuid4().hex
-    new_file_name = 'thumbnail_path/' + '%y/%m/' + unique_name + '.' + extension
+    new_file_name = 'thumbnail_path/' + today.strftime("%Y") +'/'+ today.strftime("%m") + '/'+ unique_name + '.' + extension
 
     return new_file_name
 
@@ -60,8 +61,8 @@ class Post(models.Model):
     author = models.ForeignKey(get_user_model(), on_delete= models.CASCADE, related_name='blog_posts')
 
     title = models.CharField(max_length=200)
-    thumbnail_img = models.ImageField(null=True, upload_to=thumbnail_path, max_length=52)
-    slug = models.SlugField(max_length=200)
+    thumbnail_img = models.ImageField(upload_to=thumbnail_path, max_length=52, null=True, blank=True)
+    slug = models.SlugField(max_length=200, null=True, blank=True)
     view_count = models.PositiveIntegerField(default=0)
     updated_on = models.DateTimeField('Date and Time', auto_now= True)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -78,6 +79,10 @@ class Post(models.Model):
         if self.created_on and self.created_on < now:
             raise ValidationError('Please, pick present date and time...')
 
+    def save(self, *args, **kwargs):
+        if not self.slug and self.title:
+            self.slug = slugify(self.title)
+        super(Post, self).save(*args, **kwargs)
 
     class Meta:
         ordering = ['-created_on']

@@ -4,7 +4,16 @@
 
 {% block body %}
 
-<h1>This is home page of our website, anyone can visite it. authentication not required</h1>
+<p>Latest posts</p>
+{% if posts_list %}
 
-
+    {% for post in all_posts_list %}
+        {{ post.content | safe }}
+    {% endfor %}
+{% endif %}
+<br>
+<p>Most popular on this site</p>
+    {% for post in most_popular_posts_list %}
+        {{ post.content | safe }}
+    {% endfor %}
 {% endblock %}
