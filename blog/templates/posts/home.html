@@ -10,10 +10,11 @@
     {% for post in all_posts_list %}
         {{ post.content | safe }}
     {% endfor %}
+
 {% endif %}
 <br>
 <p>Most popular on this site</p>
-    {% for post in most_popular_posts_list %}
-        {{ post.content | safe }}
+    {% for popular_post in most_popular_posts_list %}
+        {{ popular_post.content | safe }}
     {% endfor %}
 {% endblock %}

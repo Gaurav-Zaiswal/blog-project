@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView, TemplateView
+from django.views.generic import ListView, TemplateView, DetailView
 from django.views.generic.edit import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.decorators import method_decorator
@@ -22,7 +22,7 @@ class HomeView(ListView):
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
         context['all_posts_list'] = Post.objects.filter(status=1).order_by('-created_on')
-        context['most_popular_posts_list'] = Post.objects.filter(status=1).order_by('views')[:5]
+        context['most_popular_posts_list'] = Post.objects.filter(status=1).order_by('view_count')[:5]
         return context
 
 
@@ -41,3 +41,8 @@ class CreatePostView(SuccessMessageMixin, CreateView):
         form.save_m2m()
         return super(CreatePostView, self).form_valid(form)
 
+
+# class DetailPostView(DetailView):
+#     model = Post
+#     context_object_name = 'detailed_post'
+#     template_name = "posts/detailpost.html"
