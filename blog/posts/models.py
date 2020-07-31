@@ -22,10 +22,10 @@ STATUS = (
 # If your code creates datetime objects, they should be aware too
 # same as datetime.datetime.now()
 now = timezone.now()
+today = datetime.datetime.now()
 
 
 def thumbnail_path(instance, filename):
-    today = datetime.datetime.now()
     # checks jpg exttension
     extension = filename.split('.')[1]
     if len(filename.split('.')) != 2:
@@ -57,6 +57,7 @@ class Category(models.Model):
 
 
 class Post(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     category = models.ForeignKey(Category, on_delete= models.CASCADE)
     author = models.ForeignKey(get_user_model(), on_delete= models.CASCADE, related_name='blog_posts')
 
@@ -80,8 +81,7 @@ class Post(models.Model):
             raise ValidationError('Please, pick present date and time...')
 
     def save(self, *args, **kwargs):
-        if not self.slug and self.title:
-            self.slug = slugify(self.title)
+        self.slug = slugify(self.title)
         super(Post, self).save(*args, **kwargs)
 
 
@@ -93,4 +93,4 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('post_detail', args=[self.pk])
+        return reverse('post_detail', kwargs={'slug': self.slug})

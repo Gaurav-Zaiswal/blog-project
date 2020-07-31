@@ -42,7 +42,13 @@ class CreatePostView(SuccessMessageMixin, CreateView):
         return super(CreatePostView, self).form_valid(form)
 
 
-# class DetailPostView(DetailView):
-#     model = Post
-#     context_object_name = 'detailed_post'
-#     template_name = "posts/detailpost.html"
+class DetailPostView(DetailView):
+    model = Post
+    context_object_name = 'detailed_post'
+    template_name = "posts/detailpost.html"
+
+    def get_object(self):
+        object = super(DetailPostView, self).get_object()
+        object.view_count += 1
+        object.save()
+        return object

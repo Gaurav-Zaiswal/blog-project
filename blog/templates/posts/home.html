@@ -8,7 +8,11 @@
 {% if posts_list %}
 
     {% for post in all_posts_list %}
-        {{ post.content | safe }}
+    <li><a href="{% url 'posts:detail-post' post.slug %}">{{ post.title }}</a></li>
+        {{ post.content | safe | slice:":100" }}<span>...</span>
+        {{ post.author }}
+        {{ post.created_on  }}
+        {{ post.view_count }}
     {% endfor %}
 
 {% endif %}
