@@ -14,6 +14,14 @@
 
 
 <br><br>
-<a href="{{ url 'posts:new-post' }}"></a>
+<a href="{% url 'posts:new-post' %}">Create new Post</a>
+
+<ul>
+ {% for post in author_posts_list %}
+  <li>{{ post }} : {{ post.view_count }} : {{ post.status }}
+    <button>Edit</button>  <button>Delete</button>
+  </li>
+{% endfor %}
+</ul>
 
 {% endblock %}

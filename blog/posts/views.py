@@ -32,11 +32,12 @@ class CreatePostView(SuccessMessageMixin, CreateView):
     form_class = PostForm
     template_name = 'posts/newpost.html'
     success_url = '/users/profile'
+    # success_url = '/post / < slug: slug > /'
     success_message = 'New post was created SuccessFully!'
 
     def form_valid(self, form):
         form.save(commit=False)
-        form.instance.author = self.request.user
+        form.instance.author = self.request.user # set author name dinamically
         form.save()
         form.save_m2m()
         return super(CreatePostView, self).form_valid(form)
