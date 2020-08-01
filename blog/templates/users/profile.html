@@ -19,7 +19,7 @@
 <ul>
  {% for post in author_posts_list %}
   <li>{{ post }} : {{ post.view_count }} : {{ post.status }}
-    <button>Edit</button>  <button>Delete</button>
+      <a href="{% url "posts:update-post" post.slug %}">Edit</a>
   </li>
 {% endfor %}
 </ul>

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView, TemplateView, DetailView
+from django.views.generic import ListView, TemplateView, DetailView, UpdateView, DeleteView
 from django.views.generic.edit import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.decorators import method_decorator
@@ -53,3 +53,9 @@ class DetailPostView(DetailView):
         object.view_count += 1
         object.save()
         return object
+
+
+class UpdatePostView(UpdateView):
+    model = Post
+    fields = ('title', 'category', 'thumbnail_img', 'content', 'status')
+    template_name = "posts/update_post.html"
