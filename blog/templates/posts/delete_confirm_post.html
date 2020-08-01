@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <h3>are you sure you want to delete "{{remove_post_confirm_object}}" post permanently?</h3>
+            <p>you can darf the post instead, so that th post will be private to you only.</p>
+
+            <button type="submit" name='mybtn' value="yes">Remove</button>
+            <button type="reset" name="mybtn">Draft</button>
+
+    </form>
+</body>
+</html>

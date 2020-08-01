@@ -4,8 +4,7 @@ from django.views.generic.edit import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-# from django.contrib import message
-
+from django.urls import reverse_lazy
 
 from .models import Post
 from .forms import PostForm
@@ -55,7 +54,18 @@ class DetailPostView(DetailView):
         return object
 
 
-class UpdatePostView(UpdateView):
+class UpdatePostView(SuccessMessageMixin, UpdateView):
     model = Post
     fields = ('title', 'category', 'thumbnail_img', 'content', 'status')
     template_name = "posts/update_post.html"
+    success_message = 'Post has been updated SuccessFully!'
+
+
+class DeletePostView(SuccessMessageMixin, DeleteView):
+    model = Post
+    context_object_name = 'remove_post_confirm_object'
+    template_name = "posts/delete_confirm_post.html"
+    success_url = reverse_lazy('users:profile')
+    success_message = 'Post has been deleted SuccessFully!'
+
+
