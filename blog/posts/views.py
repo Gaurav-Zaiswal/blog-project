@@ -53,7 +53,7 @@ class DetailPostView(DetailView):
         object.save()
         return object
 
-
+@method_decorator(login_required(login_url='/login'), name='dispatch')
 class UpdatePostView(SuccessMessageMixin, UpdateView):
     model = Post
     fields = ('title', 'category', 'thumbnail_img', 'content', 'status')
@@ -61,6 +61,7 @@ class UpdatePostView(SuccessMessageMixin, UpdateView):
     success_message = 'Post has been updated SuccessFully!'
 
 
+@method_decorator(login_required(login_url='/login'), name='dispatch')
 class DeletePostView(SuccessMessageMixin, DeleteView):
     model = Post
     context_object_name = 'remove_post_confirm_object'
