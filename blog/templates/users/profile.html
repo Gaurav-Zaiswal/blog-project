@@ -15,9 +15,19 @@
 
 <br><br>
 <a href="{% url 'posts:new-post' %}">Create new Post</a>
-
+<h2>All Posts</h2>
 <ul>
- {% for post in author_posts_list %}
+ {% for post in author_all_posts_list %}
+  <li>{{ post }} : {{ post.view_count }} : {{ post.status }}
+      <a href="{% url "posts:update-post" post.slug %}">Edit</a> |
+      <a href="{% url "posts:remove-post" post.slug %}">Remove</a>
+  </li>
+{% endfor %}
+</ul>
+
+<h2>Private Posts</h2>
+<ul>
+ {% for post in author_draft_posts_list %}
   <li>{{ post }} : {{ post.view_count }} : {{ post.status }}
       <a href="{% url "posts:update-post" post.slug %}">Edit</a> |
       <a href="{% url "posts:remove-post" post.slug %}">Remove</a>

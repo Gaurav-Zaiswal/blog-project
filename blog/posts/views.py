@@ -60,6 +60,11 @@ class UpdatePostView(SuccessMessageMixin, UpdateView):
     template_name = "posts/update_post.html"
     success_message = 'Post has been updated SuccessFully!'
 
+    def get_queryset(self):
+        """ Limit a User to only modifying their own data. """
+        qs = super(UpdatePostView, self).get_queryset()
+        return qs.filter(owner=self.request.user)
+
 
 @method_decorator(login_required(login_url='/login'), name='dispatch')
 class DeletePostView(SuccessMessageMixin, DeleteView):
@@ -68,5 +73,7 @@ class DeletePostView(SuccessMessageMixin, DeleteView):
     template_name = "posts/delete_confirm_post.html"
     success_url = reverse_lazy('users:profile')
     success_message = 'Post has been deleted SuccessFully!'
+
+
 
 
