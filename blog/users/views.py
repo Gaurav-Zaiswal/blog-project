@@ -4,9 +4,10 @@ from django.views.generic.edit import (
     CreateView
 )
 from django.db.models import Q
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 from .forms import CustomUserCreationForm
-from django.views.generic import ListView
 from posts.views import HomeView
 from posts.models import Post
 
@@ -16,7 +17,7 @@ class SignUpView(CreateView):
     success_url = reverse_lazy('login')
     template_name = 'users/register.html'
 
-
+@method_decorator(login_required(login_url='/login'), name='dispatch')
 class ProfileView(ListView):
     model = Post
     template_name = "users/profile.html"
