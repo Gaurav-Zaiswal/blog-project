@@ -81,6 +81,7 @@ class Post(models.Model):
             raise ValidationError('Please, pick present date and time...')
 
     def save(self, *args, **kwargs):
+
         self.slug = slugify(self.title)
         super(Post, self).save(*args, **kwargs)
 

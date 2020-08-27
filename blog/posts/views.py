@@ -1,5 +1,5 @@
-from django.shortcuts import render
 from django.views.generic import ListView, TemplateView, DetailView, UpdateView, DeleteView
+from django.views.generic.dates import DateDetailView
 from django.views.generic.edit import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.decorators import method_decorator
@@ -42,16 +42,17 @@ class CreatePostView(SuccessMessageMixin, CreateView):
         return super(CreatePostView, self).form_valid(form)
 
 
-class DetailPostView(DetailView):
+class DetailPostView(DateDetailView):
+    """
+    Detail view of a single object on a single date; this differs from the
+    standard DetailView by accepting a year/month/day in the URL.
+    """
     model = Post
-    context_object_name = 'detailed_post'
-    template_name = "posts/detailpost.html"
+    date_field = "created_on"
+    month_format = '%m'
+    template_name = 'posts/detailpost.html'
+    context_object_name = "detailed_post"
 
-    def get_object(self):
-        object = super(DetailPostView, self).get_object()
-        object.view_count += 1
-        object.save()
-        return object
 
 @method_decorator(login_required(login_url='/login'), name='dispatch')
 class UpdatePostView(SuccessMessageMixin, UpdateView):
@@ -73,7 +74,3 @@ class DeletePostView(SuccessMessageMixin, DeleteView):
     template_name = "posts/delete_confirm_post.html"
     success_url = reverse_lazy('users:profile')
     success_message = 'Post has been deleted SuccessFully!'
-
-
-
-

@@ -8,10 +8,13 @@
 {% if posts_list %}
 
     {% for post in all_posts_list %}
-    <li><a href="{% url 'posts:detail-post' post.slug %}">{{ post.title }}</a></li>
+    <li><a href="{% url 'posts:detail-post' year=post.created_on|date:'Y' month=post.created_on|date:'m' day=post.created_on|date:'d' slug=post.slug %}">{{ post.title }}
+        </a>
+    </li>
         {{ post.content | safe | slice:":100" }}<span>...</span>
         {{ post.author }}
-        {{ post.created_on  }}
+        {{ post.created_on | date:"SHORT_DATE_FORMAT" }}
+        {{ post.created_on | date:"Y" }}
         {{ post.view_count }}
     {% endfor %}
 
