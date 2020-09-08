@@ -1,14 +1,22 @@
+import datetime
+
 from django.views.generic import ListView, TemplateView, DetailView, UpdateView, DeleteView
 from django.views.generic.dates import DateDetailView
 from django.views.generic.edit import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.http import Http404
+from django.utils.translation import gettext as _
 from django.urls import reverse_lazy
+from django.db.models import Q
 
 from .models import Post
 from .forms import PostForm
 
+now_today = datetime.datetime.now().date()
+one_month_back_from_today = now_today - datetime.timedelta(days=31)
+# print(now_today)
 
 class HomeView(ListView):
     model = Post
@@ -19,9 +27,13 @@ class HomeView(ListView):
     #     queryset = Post.objects.filter(status=1).order_by('-created_on') # 1: published
 
     def get_context_data(self, **kwargs):
+        print("today", now_today+datetime.timedelta(days=30))
         context = super(HomeView, self).get_context_data(**kwargs)
         context['all_posts_list'] = Post.objects.filter(status=1).order_by('-created_on')
-        context['most_popular_posts_list'] = Post.objects.filter(status=1).order_by('view_count')[:5]
+        context['popular_this_month'] = Post.objects.filter(
+            Q(status=1) & Q(created_on__gte=one_month_back_from_today) & Q(created_on__lte=now_today)
+        ).order_by('view_count')[:6]
+        context['most_popular_posts_list'] = Post.objects.filter(status=1).order_by('view_count')[:6]
         return context
 
 
@@ -42,6 +54,18 @@ class CreatePostView(SuccessMessageMixin, CreateView):
         return super(CreatePostView, self).form_valid(form)
 
 
+# class DetailPostView(DetailView, ):
+#     model = Post
+#     context_object_name = 'detailed_post'
+#     template_name = "posts/detailpost.html"
+#
+#     def get_object(self):
+#         object = super(DetailPostView, self).get_object()
+#         object.view_count += 1
+#         object.save()
+#         return object
+
+
 class DetailPostView(DateDetailView):
     """
     Detail view of a single object on a single date; this differs from the
@@ -52,6 +76,37 @@ class DetailPostView(DateDetailView):
     month_format = '%m'
     template_name = 'posts/detailpost.html'
     context_object_name = "detailed_post"
+
+    def get_object(self, queryset=None):
+        # Use a custom queryset if provided; this is required for subclasses
+        # like DateDetailView
+        if queryset is None:
+            queryset = self.get_queryset()
+        # Next, try looking up by primary key.
+        pk = self.kwargs.get(self.pk_url_kwarg)
+        slug = self.kwargs.get(self.slug_url_kwarg)
+        if pk is not None:
+            queryset = queryset.filter(pk=pk)
+        # Next, try looking up by slug.
+        if slug is not None and (pk is None or self.query_pk_and_slug):
+            slug_field = self.get_slug_field()
+            queryset = queryset.filter(**{slug_field: slug})
+        # If none of those are defined, it's an error.
+        if pk is None and slug is None:
+            raise AttributeError(
+                "Generic detail view %s must be called with either an object "
+                "pk or a slug in the URLconf." % self.__class__.__name__
+            )
+        try:
+            # Get the single item from the filtered queryset
+            # and increase the view count by one
+            obj = queryset.get()
+            obj.view_count += 1
+            obj.save()
+        except queryset.model.DoesNotExist:
+            raise Http404(_("No %(verbose_name)s found matching the query") %
+                          {'verbose_name': queryset.model._meta.verbose_name})
+        return obj
 
 
 @method_decorator(login_required(login_url='/login'), name='dispatch')
