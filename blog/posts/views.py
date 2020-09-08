@@ -1,5 +1,8 @@
 import datetime
+import pytz
 
+from django.utils import timezone
+from django.utils.timezone import make_aware
 from django.views.generic import ListView, TemplateView, DetailView, UpdateView, DeleteView
 from django.views.generic.dates import DateDetailView
 from django.views.generic.edit import CreateView
@@ -14,9 +17,14 @@ from django.db.models import Q
 from .models import Post
 from .forms import PostForm
 
-now_today = datetime.datetime.now().date()
-one_month_back_from_today = now_today - datetime.timedelta(days=31)
-# print(now_today)
+
+now_today = datetime.datetime.now()
+one_month_back_from_today = now_today - timezone.timedelta(days=32)
+
+# setting up local timezone
+now_today = make_aware(now_today)
+one_month_back_from_today = make_aware(one_month_back_from_today)
+# print("now today with local time : ", now_today)
 
 class HomeView(ListView):
     model = Post
@@ -27,11 +35,10 @@ class HomeView(ListView):
     #     queryset = Post.objects.filter(status=1).order_by('-created_on') # 1: published
 
     def get_context_data(self, **kwargs):
-        print("today", now_today+datetime.timedelta(days=30))
         context = super(HomeView, self).get_context_data(**kwargs)
         context['all_posts_list'] = Post.objects.filter(status=1).order_by('-created_on')
         context['popular_this_month'] = Post.objects.filter(
-            Q(status=1) & Q(created_on__gte=one_month_back_from_today) & Q(created_on__lte=now_today)
+            Q(status=1) & Q(created_on__gte=one_month_back_from_today) & Q(created_on__lt=now_today)
         ).order_by('view_count')[:6]
         context['most_popular_posts_list'] = Post.objects.filter(status=1).order_by('view_count')[:6]
         return context
