@@ -130,3 +130,11 @@ dmypy.json
 
 .idea/
 .idea
+
+
+
+# javascript files
+node_modules/
+*.jpg
+*.png
+*.jpeg

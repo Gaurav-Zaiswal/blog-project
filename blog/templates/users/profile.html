@@ -1,38 +1,67 @@
-{% extends 'users/base.html' %}
+{% extends 'main_dashboard.html' %}
 
-{% block title %}Profile{% endblock %}
+{% block title %}Dashboard {% endblock %}
 
-{% block content %}
-{% if user.is_authenticated %}
-  Hi {{ user.username }}!
-  <p><a href="{% url 'logout' %}">logout</a></p>
-{% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">login</a> |
-  <a href="{% url 'signup' %}">signup</a>
-{% endif %}
+{% block body %}
+<div class="d-flex flex-row justify-content-between w-full py-2">
+    <h4 class="text-secondary">Recent Posts</h4>
+    <a
+        href="{% url 'posts:new-post' %}"
+        class="btn btn-info" type="button"
+    >Create New Post
+    </a>
+</div>
 
+<div class="table-responsive-xl">
+    <table class="table table-hover">
+        <thead class="thead-light">
+        <tr>
+            <th scope="w-1/2">Title</th>
+            <th scope="w-3/4">Last Update</th>
+            <th scope="col-1">Views</th>
+            <th scope="col-1">Status</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if author_all_posts_list %}
+        {{ author_all_post_list.0.title }}
+        {% for post in author_all_posts_list %}
+        <tr>
+            <td class="w-5/6"> {{ post.title | slice:40 }}...</td>
+            <td>
+                {{ post.updated_on }}
+            </td>
+            <td>{{ post.view_count }}</td>
+            <td class="activity-post-status">{{ post.status }}</td>
+            <td>
+                <a
+                        href="{% url 'posts:update-post' year=post.created_on|date:'Y' month=post.created_on|date:'m' day=post.created_on|date:'d' slug=post.slug %}"
+                        class="btn btn-info" type="button"
+                    >
+                    <i class="fas fa-edit cursor-pointer"></i>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
+</div>
+<script>
+    // script to show post status as Published or Private, if status === 1 => published, else => private
+    const tableDesc = document.getElementsByClassName("activity-post-status");
 
-<br><br>
-<a href="{% url 'posts:new-post' %}">Create new Post</a>
-<h2>All Posts</h2>
-<ul>
- {% for post in author_all_posts_list %}
-  <li>{{ post }} : {{ post.view_count }} : {{ post.status }}
-      <a href="{% url "posts:update-post" post.slug %}">Edit</a> |
-      <a href="{% url "posts:remove-post" post.slug %}">Remove</a>
-  </li>
-{% endfor %}
-</ul>
+    window.onload = () => {
+        for(let i =0; i<tableDesc.length; i++){
+          if (tableDesc[i].innerText === "1") {
+                tableDesc[i].innerText = "published";
+            } else {
+                tableDesc[i].innerText = "private";
+                tableDesc[i].setAttribute("class", "text-danger");
+            }
+        }
+    }
 
-<h2>Private Posts</h2>
-<ul>
- {% for post in author_draft_posts_list %}
-  <li>{{ post }} : {{ post.view_count }} : {{ post.status }}
-      <a href="{% url "posts:update-post" post.slug %}">Edit</a> |
-      <a href="{% url "posts:remove-post" post.slug %}">Remove</a>
-  </li>
-{% endfor %}
-</ul>
-
+</script>
 {% endblock %}

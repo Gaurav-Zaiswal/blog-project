@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+    {% load static %}
+
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+
+    <!--    static files links-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+    <link href="{% static 'users/css/style.css' %}" rel="stylesheet">
+
+    <!--    <script src="{% static 'users/js/main.js' %}"></script>-->
+    <!--     font-awesome cdn  -->
+<!--    <script crossorigin="anonymous" src="https://kit.fontawesome.com/de0476f8c8.js"></script>-->
+
+    {% block header %} {% endblock %}
+
+    <title>{% block title %}Dashboard Parent{% endblock %}</title>
+</head>
+<body>
+<main>
+    <div class="wrapper d-flex align-items-stretch">
+        {% if user.is_authenticated %}
+        <nav id="sidebar">
+            <div class="p-4 pt-5">
+                <div class="mb-5">
+                    <a class="img logo rounded-circle mb-2"
+                       style="background-image:url('{{ user.profile.image.url }}');"></a>
+                    <p class="text-white text-center">
+                        Namaste, {{ user.first_name|capfirst }} {{ user.last_name|capfirst }}!</p>
+                </div>
+
+                <ul class="list-unstyled components mb-5">
+                    <li class="active">
+                        <a href="#">Dashboard</a>
+                    </li>
+                    <li>
+                        <a aria-expanded="false" class="dropdown-toggle" data-toggle="collapse"
+                           href="#homeSubmenu">Settings</a>
+                        <ul class="collapse list-unstyled" id="homeSubmenu">
+
+                            <li>
+                                <a aria-expanded="false"
+                                   href="{% url 'users:update-user' pk=request.user.id %}">Update About Yourself</a>
+                            </li>
+
+                            <li>
+                                <a aria-expanded="false"
+                                   href="{% url 'users:update-profile' pk=request.user.profile.id %}">Edit Profile</a>
+                            </li>
+
+                            <li>
+                                <a aria-expanded="false"
+                                   href="#">Change Password</a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'logout' %}">logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">About Us</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact Us</a>
+                    </li>
+                </ul>
+                {% endif %}
+                <div class="footer">
+                    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                        All rights reserved | <a href="#">NewsPortal.com</a></p>
+                    <p>This template is made with <i aria-hidden="true" class="icon-heart"></i>
+                        by Colorlib
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+
+
+                </div>
+
+            </div>
+        </nav>
+
+        <!-- Page Content  -->
+        <div class="p-4 p-md-5" id="content">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <button class="btn btn-primary" id="sidebarCollapse" type="button">
+                        <i class="fa fa-bars"></i>
+                        <span class="sr-only">Toggle Menu</span>
+                    </button>
+                    <!--                    <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"-->
+                    <!--                            class="btn btn-dark d-inline-block d-lg-none ml-auto" data-target="#navbarSupportedContent"-->
+                    <!--                            data-toggle="collapse"-->
+                    <!--                            type="button">-->
+                    <!--                        <i class="fa fa-bars"></i>-->
+                    <!--                    </button>-->
+
+                    <!--                    <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+                    <a href="/">
+                        <h3>NewsPortal.com</h3>
+                    </a>
+
+                    <!--                    </div>-->
+                </div>
+            </nav>
+
+            {% block body %}
+
+            {% endblock %}
+        </div>
+
+    </div>
+</main>
+<script src="{% static 'users/js/jquery.min.js' %}"></script>
+<script src="{% static 'users/js/popper.js' %}"></script>
+<script src="{% static 'users/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'users/js/main.js' %}"></script>
+</body>
+</html>

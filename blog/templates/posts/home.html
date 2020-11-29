@@ -4,24 +4,204 @@
 
 {% block body %}
 
-<p>Latest posts</p>
-{% if posts_list %}
+<!-- LANDING PAGE body starts -->
+<div class="main-wrapper px-3 py-3 md:px-6 md:py-6">
+    <!-- top 3 posts with image and captions -->
+    <div class="most-recent-container">
+        {% if posts_list %}
+        {% for post in recent_three %}
+        {% if post.thumbnail_img %}
 
-    {% for post in all_posts_list %}
-    <li><a href="{% url 'posts:detail-post' year=post.created_on|date:'Y' month=post.created_on|date:'m' day=post.created_on|date:'d' slug=post.slug %}">{{ post.title }}
-        </a>
-    </li>
-        {{ post.content | safe | slice:":100" }}<span>...</span>
-        {{ post.author }}
-        {{ post.created_on | date:"SHORT_DATE_FORMAT" }}
-        {{ post.created_on | date:"Y" }}
-        {{ post.view_count }}
-    {% endfor %}
+        <div class="most-recent flex justify-between mb-4 md:mb-4">
+            <div class="img-holder w-2/6 mr-2 md:mr-4">
+                <img alt="{{ post.thumbnail_img }}" src="{{ post.thumbnail_img.url }}">
+            </div>
+            <div class="blog-intro-box w-full opacity-75">
+                <a href="{% url 'posts:detail-post' year=post.created_on|date:'Y' month=post.created_on|date:'m' day=post.created_on|date:'d' slug=post.slug %}">
+                    <p class="font-semibold md:text-xl md:font-bold lg:text-2xl">
+                        {{ post.title }}
+                    </p>
+                </a>
+                <div class="blog-into">
+                    <!-- category -->
+                    <span class="blog-into-category text-xs mr-2 uppercase md:mr-4 md:text-sm">{{ post.category }}</span>
+                    <span class="blog-into-author text-xs mr-2 capitalize md:mr-4 md:text-sm">
+                                {{ post.author.first_name }} {{ post.author.last_name }}</span>
+                    <span class="blog-into-date hidden text-xs md:inline-block md:text-sm">{{ post.created_on | date:"SHORT_DATE_FORMAT" }}</span>
+                    <div class="blog-brief mt-2 leading-relaxed tracking-wide hidden md:block">
+                        {{ post.content | safe | slice:":200" }} <span>...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
 
-{% endif %}
-<br>
-<p>Most popular on this site</p>
-    {% for popular_post in most_popular_posts_list %}
-        {{ popular_post.content | safe }}
-    {% endfor %}
+        {% endif %}
+    </div>
+
+    <!-- POPULAR blogs section starts -->
+    <div class="popular-blogs-wrapper mt-4">
+        <div class="popular-blogs md:flex justify-between">
+
+            <!--                    all time most views-->
+            <div class="alltime-popular md:w-1/3 md:pr-2">
+                <ul>
+                    <li>
+                        <div class="underline-heading pt-3 pb-6 text-left font-semibold">
+                            <i class="fa fa-list-ul "></i>
+                            <span class="mx-2">Most Viewed</span>
+                        </div>
+                    </li>
+
+                    {% if most_popular_posts_list %}
+                    <li class="mb-3">
+                        {% if most_popular_posts_list.0.thumbnail_img %}
+                        <div class="fig-container ">
+                            <a href="{% url 'posts:detail-post' year=most_popular_posts_list.0.created_on|date:'Y' month=most_popular_posts_list.0.created_on|date:'m' day=most_popular_posts_list.0.created_on|date:'d' slug=most_popular_posts_list.0.slug %}">
+                                <figure>
+                                    <div class="fig-holder relative h-56">
+                                        <img alt=" image thumbnail "
+                                             class="max-w-full min-h-full max-h-full block object-cover z-10"
+                                             src="{{ most_popular_posts_list.0.thumbnail_img.url }}">
+                                    </div>
+
+                                    <figcaption class="relative abolute bottom-0 w-full z-30">
+                                        <p class="absolute bottom-0 p-1 z-20 text-white opacity-100">
+                                            {{ most_popular_posts_list.0.title }}</p>
+                                    </figcaption>
+                                </figure>
+                            </a>
+                        </div>
+                        {% endif %}
+                    </li>
+
+                    {% for post in most_popular_posts_list %}
+                    <a href="{% url 'posts:detail-post' year=post.created_on|date:'Y' month=post.created_on|date:'m' day=post.created_on|date:'d' slug=post.slug %}">
+
+                        <li class="list-disc ml-4 border-b-2 py-2 md:py-3 cursor-pointer hover:text-gray-700">
+                            {{ post.title }}
+                        </li>
+                    </a>
+
+
+                    {% endfor %}
+                    {% endif %}
+
+                </ul>
+                <a class="read-btn no-underline" href="#">
+                    <div
+                            class="my-3 w-full p-2 text-center border-2 cursor-pointer duration-400 ease-in hover:bg-gray-800 hover:border-gray-800 hover:text-white">
+                        Load More
+                    </div>
+
+                </a>
+            </div>
+
+            <!--                    Trending Posts -->
+
+            <div class="monthly-popular md:w-1/3 md:px-2">
+                <ul>
+                    <li>
+                        <div class="underline-heading pt-3 pb-6 text-left font-semibold">
+                            <i class="fa fa-list-ul "></i>
+                            <span class="mx-2">Popular This Month</span>
+                        </div>
+                    </li>
+                    {% if popular_this_month %}
+                    <li class="mb-3">
+                        <div class="fig-container">
+                            <a href="{% url 'posts:detail-post' year=popular_this_month.0.created_on|date:'Y' month=popular_this_month.0.created_on|date:'m' day=popular_this_month.0.created_on|date:'d' slug=popular_this_month.0.slug %}">
+
+                                <figure>
+                                    <div class="fig-holder relative h-56">
+                                        <img alt="{{ popular_this_month.0.thumbnail_img }}"
+                                             class="max-w-full min-h-full max-h-full block object-cover z-10"
+                                             src="{{ popular_this_month.0.thumbnail_img.url }}">
+                                    </div>
+
+                                    <figcaption class="relative abolute bottom-0 w-full z-30">
+                                        <p class="absolute bottom-0 p-1 z-20 text-white opacity-100">
+                                            {{ popular_this_month.0.title }}</p>
+                                    </figcaption>
+                                </figure>
+                            </a>
+                        </div>
+                    </li>
+
+                    {% for post in popular_this_month %}
+                    <a href="{% url 'posts:detail-post' year=post.created_on|date:'Y' month=post.created_on|date:'m' day=post.created_on|date:'d' slug=post.slug %}">
+
+                        <li class="list-disc ml-4 border-b-2 py-2 md:py-3 cursor-pointer hover:text-gray-700">
+                            {{ post.title }}
+                        </li>
+                    </a>
+                    {% endfor %}
+                    {% endif %}
+                </ul>
+
+                <a class="read-btn no-underline" href="#">
+                    <div
+                            class="my-3 w-full p-2 text-center border-2 cursor-pointer duration-400 ease-in hover:bg-gray-800 hover:border-gray-800 hover:text-white">
+                        Load More
+                    </div>
+
+                </a>
+            </div>
+
+            <!--                    latest uploads -->
+
+            <div class="latest-uploads md:w-1/3 md:pl-2">
+                <ul>
+                    <li>
+                        <div class="underline-heading pt-3 pb-6 text-left font-semibold">
+                            <i class="fa fa-list-ul "></i>
+                            <span class="mx-2">Latest Uploads</span>
+                        </div>
+                    </li>
+                    {% if recent_except_three %}
+                    <li class="mb-3">
+                        <div class="fig-container">
+                            <a href="{% url 'posts:detail-post' year=popular_this_month.0.created_on|date:'Y' month=popular_this_month.0.created_on|date:'m' day=popular_this_month.0.created_on|date:'d' slug=popular_this_month.0.slug %}">
+                                <figure>
+                                    <div class="fig-holder relative h-56">
+                                        <img alt="image thumbnail"
+                                             class="max-w-full max-h-full block z-10"
+                                             src="{{ popular_this_month.0.thumbnail_img.url }}">
+                                    </div>
+
+                                    <figcaption class="relative w-full z-40">
+                                        <p
+                                                class="absolute p-1 z-20 bottom-0 text-white opacity-100 overflow-hidden">
+                                            {{ recent_except_three.0.title }}</p>
+                                    </figcaption>
+                                </figure>
+                            </a>
+                        </div>
+                    </li>
+
+                    {% for post in recent_except_three %}
+                    <a href="{% url 'posts:detail-post' year=post.created_on|date:'Y' month=post.created_on|date:'m' day=post.created_on|date:'d' slug=post.slug %}">
+
+                        <li class="list-disc ml-4 border-b-2 py-2 md:py-3 cursor-pointer hover:text-gray-700">
+                            {{ post.title }}
+                        </li>
+                    </a>
+                    {% endfor %}
+                    {% endif %}
+                </ul>
+                <a class="read-btn no-underline" href="#">
+                    <div
+                            class="my-3 w-full p-2 text-center border-2 cursor-pointer duration-400 ease-in hover:bg-gray-800 hover:border-gray-800 hover:text-white">
+                        Load More
+                    </div>
+
+                </a>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- LANDING PAGE body ends here-->
+
 {% endblock %}

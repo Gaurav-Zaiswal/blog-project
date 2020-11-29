@@ -7,9 +7,9 @@ app_name = 'posts'
 urlpatterns = [
     path('', HomeView.as_view(), name='landingpage'),
     path('u/new-post/', CreatePostView.as_view(), name='new-post'),
-    path('post/<slug:slug>/edit',
+    re_path(r'^post/(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<slug>[\w-]+)/edit/$',
          UpdatePostView.as_view(), name='update-post'),
-    path('post/<slug:slug>/remove',
+    re_path(r'^post/(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<slug>[\w-]+)/remove$',
          DeletePostView.as_view(), name='remove-post'),
     re_path(r'^post/(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<slug>[\w-]+)/$',
             DetailPostView.as_view(), name='detail-post'),

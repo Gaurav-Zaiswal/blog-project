@@ -1,18 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.media }}
-            {{form.as_p | safe }}
+{% extends 'main_dashboard.html' %}
 
-            <button type="submit" name='mybtn'>Update</button>
-            <button type="reset" name="mybtn">Reset</button>
+{% block title %}Update Post{% endblock %}
 
+{% block body %}
+<h4 class="text-center mb-4 py-2 text-info">Update Post</h4>
+<div class="card px-3 py-4">
+    <form enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form.as_p }}
+
+        <input class="btn btn-success" type="submit" value="Update">
+        <button class='btn btn-danger px-4' data-target="#exampleModal" data-toggle="modal" type="button">Delete Post
+        </button>
+        <!--    <input class="btn btn-success" type="reset" value="Cancel">-->
+        <!--    <button class='btn btn-success px-4' type="reset">Cancel</button>-->
     </form>
-</body>
-</html>
+
+    <!--  modal starts -->
+    <!-- Modal -->
+    <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    You are about to delete the post <span class="text-danger">Permanently</span>. The action cannot be undo. You can make
+                    the post <span class="text-info"> private </span> to hide the post from others. Only you'll have the access to your private post(s).
+                    <p class="text-info font-medium">you can make a post private just by changing its status to draft.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" data-dismiss="modal" type="button">Make Private</button>
+
+                    <!--                    Trick to make a Post request-->
+
+                    <form
+                            action="{% url "posts:remove-post" year=post.created_on|date:'Y' month=post.created_on|date:'m' day=post.created_on|date:'d' slug=post.slug %}"
+                            method="POST">
+
+                        {% csrf_token %}
+                        <button class="btn btn-danger" type="submit">Yes, Delete</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

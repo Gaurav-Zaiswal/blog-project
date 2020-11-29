@@ -1,10 +1,226 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    {{ detailed_post.content | safe}}
-</body>
-</html>
+{% extends 'main.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+
+<!-- Load Facebook, Twitter SDK for JavaScript STARTS -->
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : '',
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v8.0'
+    });
+  };
+</script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+<div id="fb-root"></div>
+
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<!-- Load Facebook, Twitter SDK for JavaScript ENDS -->
+
+<!-- Detailed PAGE body starts -->
+<!-- detailed post and post you may like start -->
+<div class="main-wrapper px-4 md:px-12 md:py-12">
+    <div class="detailed-container md:flex">
+        <div class="detailed-post-wrapper md:w-2/3">
+            <section class="detailed-post">
+                <div class="detailed-post-header-wrapper">
+                    <div class="relative chategory inline-block my-4">
+                                <span class="footer-header cursor-pointer opacity-75 text-xs md:text-sm font-medium hover:text-gray-700">
+                                {{ detailed_post.category }}
+                                </span>
+                    </div>
+
+                    <p class="font-bold tracking-wide pb-3 md:text-3xl md:py-6">{{ detailed_post.title | safe }}</p>
+
+                    <div class="social-media-section flex md:my-6">
+                        <div class="fb-share-button"
+                             data-href="{% url 'posts:detail-post' year=detailed_post.created_on|date:'Y' month=detailed_post.created_on|date:'m' day=detailed_post.created_on|date:'d' slug=detailed_post.slug %}"
+                             data-layout="button_count"
+                             data-size="large">
+
+                            <a class="fb-xfbml-parse-ignore"
+                               href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;
+                               src=sdkpreparse"
+                               target="_blank">
+                                <i
+                                        class="fab fa-facebook text-2xl text-blue-700 hover:text-gray-800 duration-500"></i>
+                            </a>
+                        </div>
+
+                        <div class="mr-1" title="Instagram">
+                            <a class="focus:outline-none" href="http://instagram.com"
+                               rel="noopener noreferrer nofollowed"
+                               target="_blank">
+                                <i class="fas fa-envelope text-2xl text-purple-500 hover:text-gray-800 duration-500"></i>
+                            </a>
+                        </div>
+                        <div class="mr-1 rounded" title="Twitter">
+                            <a href="https://twitter.com/intent/tweet?button_hashtag=button&ref_src=twsrc%5Etfw"
+                               class="twitter-hashtag-button" data-size="large" data-dnt="true"
+                               data-show-count="false">
+                                <i class="fab fa-twitter text-2xl text-blue-500 hover:text-gray-800 duration-500"></i>
+                            </a>
+                        </div>
+                        <div class="mr-1 rounded" title="YouTube">
+                            <a class="focus:outline-none" href="http://youtube.com" rel="noopener noreferrer nofollowed"
+                               target="_blank">
+                                <i class="fab fa-whatsapp text-2xl text-green-600 hover:text-gray-800 duration-500"></i>
+                            </a>
+                        </div>
+                        <div class="mr-1 rounded" title="YouTube">
+                            <a class="focus:outline-none" href="http://youtube.com" rel="noopener noreferrer nofollowed"
+                               target="_blank">
+                                <i
+                                        class="fab fa-facebook-messenger text-2xl text-blue-600 hover:text-gray-800 duration-500"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    {% if detailed_post.thumbnail_img %}
+
+                    <div class="detailed-thumbnail-holder my-2 max-w-screen-md">
+                        <img alt="cover image" class="w-full" src="{{ detailed_post.thumbnail_img.url }}">
+                    </div>
+
+                    {% endif %}
+                    <div class="detailed-post-body py-6 border-b md:py-8">
+
+                        <div class="detail-post-date-author font-medium font-body mb-4 border-l-2 border-red-700 px-3 md:border-l-4 md:py-2 md:my-6">
+                            <!--                            <div class="detail-post-avatar inline-block w-10">-->
+                            <!--                                <img alt="author avatar" class="rounded-full w-full"-->
+                            <!--                                     src="{{ detailed_post.author.profile.image.url }}">-->
+                            <!--                            </div> -->
+
+
+                            <div>
+                                <span><i class="fa fa-user-o opacity-75"></i></span>
+                                <span class="text-xs capitalize translate-x-2 mr-2 opacity-75 md:text-sm md:font-normal">
+                                        {{ detailed_post.author.first_name }} {{ detailed_post.author.last_name }}</span>
+                                <span><i class="far fa fa-calendar opacity-75"></i></span>
+                                <span class="text-xs opacity-75 md:inline-block md:text-sm">{{ detailed_post.created_on | date:"F d, Y" }}</span>
+
+                            </div>
+                        </div>
+
+
+                        <div class="leading-loose tracking-wider font-priBody opacity-75 md:text-base">
+                            {{ detailed_post.content | safe }}
+                        </div>
+                        <p>comments here:-</p>
+                        <div class="fb-comments"
+                             data-href="127.0.0.1:8000"
+                             data-numposts="10"
+                             data-width="100%">
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- POPULAR on our Website starts -->
+            {% if popular_posts %}
+            <section class="popular-recommendation my-2 md:pt-4 md:pb-8 border-b">
+
+                <div class="relative chategory mb-4 inline-block md:my-6">
+                            <span
+                                    class="footer-header cursor-pointer text-lg font-medium md:text-2xl hover:text-gray-700">Popular
+                                Posts</span>
+                </div>
+                <article>
+                    {% for post in popular_posts %}
+                    <article class="suggestion-img-holder overflow-auto py-2 my-4 md:pb-4">
+                        {% if post.thumbnail_img %}
+                        <div class="img-holder float-left w-1/2 md:w-2/6 mr-2 md:mr-4">
+                            <img alt="thumbnail image" src="{{ post.thumbnail_img.url }}">
+                        </div>
+                        {% endif %}
+                        <div class="blog-intro-box block opacity-75">
+                            <p class="font-semibold md:text-xl md:font-bold lg:text-2xl">{{ post.title }}</p>
+                            <p class="leading-relaxed tracking-wide">
+                                {{ post.content | safe | slice:":125"}}.....
+
+                                <a class="hover:underline"
+                                   href="{% url 'posts:detail-post' year=post.created_on|date:'Y' month=post.created_on|date:'m' day=post.created_on|date:'d' slug=post.slug %}">
+                                    <span class="font-medium "> read full story
+
+                                        <!--                                        right arrow-->
+                                        &#8594;
+                                    </span>
+                                </a>
+                            </p>
+                        </div>
+                    </article>
+                    {% endfor %}
+                </article>
+            </section>
+            {% endif %}
+
+
+            <!-- RECENT blog starts here  -->
+            {% if recent_posts %}
+            <section class="recent-posts-wrapper md:py-8">
+
+                <div class="relative inline-block">
+                            <span
+                                    class="footer-header cursor-pointer font-medium md:text-2xl hover:text-gray-700">Recent
+                                Posts</span>
+                </div>
+
+                <article class="overflow-x-scroll md:grid grid-cols-2 col-gap-4 md:py-4 ">
+
+                    {% for post in recent_posts %}
+
+                    <article class="suggestion-img-holder py-3 border-b ">
+                        {% if post.thumbnail_img %}
+                        <div class="img-holder float-right w-2/6">
+                            <img alt="thumbnail img"
+                                 src="{{ post.thumbnail_img.url }}"
+                            >
+                        </div>
+                        {% endif %}
+                        <a href="{% url 'posts:detail-post' year=post.created_on|date:'Y' month=post.created_on|date:'m' day=post.created_on|date:'d' slug=post.slug %}">
+                            <p class="font-semibold opacity-75 md:text-md lg:text-lg">
+                                {{ post.title }}
+                            </p>
+                        </a>
+                    </article>
+                    {% endfor %}
+
+                </article>
+            </section>
+            {% endif %}
+        </div>
+
+        <!--  POST YOU MAY LIKE STARTS HERE (hidden ON MOBILE) -->
+        {% if posts_you_may_like %}
+        <section class="detailed-page-suggestions hidden md:block md:w-1/3 md:ml-6">
+            <div class="you-may-like-holder inline-block relative mb-8">
+                <span class="you-may-like font-semibold text-red-600 text-xl mb-6">You May Also Like</span>
+            </div>
+            <div class="border">
+                <article class="may-like-card px-4">
+                    {% for post in posts_you_may_like %}
+                    <article class="most-recent overflow-auto border-b md:py-3">
+                        {% if post.thumbnail_img %}
+                        <div class="w-4/12 float-right">
+                            <img alt="news thumbnail image" src="{{ post.thumbnail_img.url }}">
+                        </div>
+                        {% endif %}
+                        <a href="{% url 'posts:detail-post' year=post.created_on|date:'Y' month=post.created_on|date:'m' day=post.created_on|date:'d' slug=post.slug %}">
+                            <p class="font-semibold opacity-75 lg:text-lg ">{{ post.title }}</p>
+                        </a>
+                    </article>
+                    {% endfor %}
+                </article>
+            </div>
+        </section>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

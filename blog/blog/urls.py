@@ -5,21 +5,28 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.conf.urls.static import static
 
-# from todo
+from django.contrib.flatpages import views as flat_views
 
-# print(User.username)
-# username_url_slug = 'p/'+User.username
 
 urlpatterns = [
     path('', include('posts.urls', namespace='posts')),
     path('site/admin/', admin.site.urls),
-    # path(username_url_slug, include('users.urls', namespace='profile-redirect')),
-    path('users/', include('users.urls', namespace='users-redirect')),
-    path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
+    path('author/', include('users.urls', namespace='users-redirect')),
+    path('login/', auth_views.LoginView.as_view(
+        template_name='users/login.html',
+        extra_context={
+            'next': '/author/redirect-to-profile/'
+        }
+    ), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
 
     # url for ckeditor
     path('ckeditor/', include('ckeditor_uploader.urls')),
+]
+
+urlpatterns += [
+    path('privacy-and-cookies/', flat_views.flatpage, {'url': '/privacy-and-cookies/'}, name='privacy'),
+    path('terms-and-conditions/', flat_views.flatpage, {'url': '/terms-and-conditions/'}, name='terms'),
 ]
 
 

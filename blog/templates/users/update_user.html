@@ -1,0 +1,42 @@
+{% extends 'main_dashboard.html' %}
+
+{% block title %}Dashboard {% endblock %}
+
+{% block body %}
+<div class="py-2">
+    <form method="post" class="shadow-sm p-3 mb-5 bg-white rounded">
+        {% csrf_token %}
+        <div>
+            <legend class="text-secondary text-center">Update Your Information</legend>
+
+        </div>
+
+        <fieldset class="form-group w-100">
+            <label for="email">Email address</label>
+            <p>{{ form.email }}</p>
+            <small class="form-text text-muted" id="emailHelp">We'll never share your email with anyone else.</small>
+        </fieldset>
+
+        <fieldset class="form-group">
+            <label for="username">Username</label>
+            <p>{{ form.username }}</p>
+        </fieldset>
+
+        <fieldset class="form-group">
+            <label for="first_name">First Name</label>
+            <p>{{ form.first_name }}</p>
+        </fieldset>
+
+        <fieldset class="form-group">
+            <label for="first_name">Last Name</label>
+            <p>{{ form.last_name }}</p>
+        </fieldset>
+        <!--        <div class="form-group">-->
+        <!--            <label for="exampleInputPassword1">Password</label>-->
+        <!--            <input class="form-control" id="exampleInputPassword1" type="password">-->
+        <!--        </div>-->
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+</div>
+
+{% endblock %}

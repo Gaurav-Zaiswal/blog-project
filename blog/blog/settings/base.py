@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'posts.apps.PostsConfig',
 
+    # defaults
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -27,9 +28,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # flatpages
+    'django.contrib.sites',
+    'django.contrib.flatpages',
+
     # 3rd party
     'ckeditor',
     'ckeditor_uploader',
+    'django_countries',
+    'tempus_dominus',
 ]
 
 MIDDLEWARE = [
@@ -40,6 +47,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    #flatpages
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 ]
 
 ROOT_URLCONF = 'blog.urls'
@@ -87,6 +97,7 @@ STATIC_URL = '/static/'
 ##############################
 ## manually added settings: ##
 ##############################
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
@@ -100,10 +111,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 AUTH_USER_MODEL = 'users.User'
 
 # login-logout redirects
-LOGIN_REDIRECT_URL = '/users/p'
+# LOGIN_REDIRECT_URL = '/users/profile'
 LOGOUT_REDIRECT_URL = '/'
 
 
+# flatapps(for aboutus, privacy ect) configurations
+SITE_ID = 1
 
 # 3rd party apps settings
 # media path for ckeditor

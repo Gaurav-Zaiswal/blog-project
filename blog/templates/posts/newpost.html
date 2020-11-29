@@ -1,21 +1,16 @@
-{% load static %}
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'main_dashboard.html' %}
 
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.media }}
-        {{ form.as_p }}
-        <button type="submit" name='mybtn'>Post</button>
+{% block title %}Create Post{% endblock %}
 
-    </form>
-</body>
-</html>
+{% block body %}
+<h4 class="text-center mb-4 py-2 text-info">Create a New Post</h4>
+<div class="card px-3 py-4">
+  <form enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+    {{ form.media }}
+    {{ form.as_p }}
+    <button class='btn btn-info px-4' type="submit">Post</button>
+</form>
+</div>
+
+{% endblock %}

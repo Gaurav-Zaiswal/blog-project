@@ -1,0 +1,54 @@
+{% extends 'main_dashboard.html' %}
+
+{% block header %}
+
+    {# Django Tempus Dominus assets are included in `{{ form.media }}` #}
+    {{ form.media }}
+
+{% endblock %}
+
+{% block title %}Dashboard {% endblock %}
+
+{% block body %}
+<div class=" py-2">
+    <form method="post"  enctype="multipart/form-data" class="shadow-sm p-3 mb-5 bg-white rounded">
+        {% csrf_token %}
+        <div>
+            <legend class="text-secondary text-center">Update Your Information</legend>
+
+        </div>
+        <fieldset class="form-group w-100">
+            <label for="email">Change Profile Picture</label>
+            <p>{{ form.image }}</p>
+        </fieldset>
+
+        <fieldset class="form-group">
+            <label for="username">Country</label>
+            <p>{{ form.country }}</p>
+        </fieldset>
+
+        <fieldset class="form-group">
+            <label for="first_name">Date of birth</label>
+            <div class="input-group date" data-target-input="nearest" id="datetimepicker1">
+                {{ form.dob }}
+            </div>
+        </fieldset>
+        <!--        <div class="form-group">-->
+        <!--            <label for="exampleInputPassword1">Password</label>-->
+        <!--            <input class="form-control" id="exampleInputPassword1" type="password">-->
+        <!--        </div>-->
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+</div>
+
+<!--to initialize datetime picker-->
+
+<script>
+  $(function () {
+    $("#datetimepicker1").datetimepicker({
+      format: 'DD/MM/YYYY',
+    });
+  });
+</script>
+
+{% endblock %}

@@ -12,7 +12,6 @@
     <script src="{% static 'posts/js/main.js' %}"></script>
 
     <!-- font-awesome cdn  -->
-    <script src="https://kit.fontawesome.com/de0476f8c8.js" crossorigin="anonymous"></script>
 
     <title>{% block title %}Landing Page{% endblock %}</title>
     <style>
@@ -96,7 +95,7 @@
             </button>
             <ul class="main-navigation clear-dropdown flex justify-center md:transform md:-translate-x-16">
                 <li class="mr-6 transform hover:scale-110 duration-700 focus:outline-none">
-                    <a class="text-xl focus:outline-none" href="{% url 'posts:landingpage' %}">
+                    <a class="text-xl focus:outline-none" href="/">
                         <i class="fas fa-home text-gray-800 hover:text-indigo-600"></i>
                     </a>
                 </li>
@@ -155,7 +154,7 @@
             
             <ul class="main-navigation clear-dropdown">
                 <li class="py-2 transform hover:translate-x-1 duration-500">
-                    <a class="text-gray-600 font-bold hover:text-gray-900 focus:outline-none duration-200" href="#">
+                    <a class="text-gray-600 font-bold hover:text-gray-900 focus:outline-none duration-200" href="/">
                         Home
                     </a>
                 </li>
