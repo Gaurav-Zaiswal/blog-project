@@ -8,14 +8,17 @@
 <div class="main-wrapper px-3 py-3 md:px-6 md:py-6">
     <!-- top 3 posts with image and captions -->
     <div class="most-recent-container">
-        {% if posts_list %}
+        {% if recent_three %}
         {% for post in recent_three %}
-        {% if post.thumbnail_img %}
 
         <div class="most-recent flex justify-between mb-4 md:mb-4">
+            {% if post.thumbnail_img %}
+
             <div class="img-holder w-2/6 mr-2 md:mr-4">
                 <img alt="{{ post.thumbnail_img }}" src="{{ post.thumbnail_img.url }}">
             </div>
+            {% endif %}
+
             <div class="blog-intro-box w-full opacity-75">
                 <a href="{% url 'posts:detail-post' year=post.created_on|date:'Y' month=post.created_on|date:'m' day=post.created_on|date:'d' slug=post.slug %}">
                     <p class="font-semibold md:text-xl md:font-bold lg:text-2xl">
@@ -34,7 +37,6 @@
                 </div>
             </div>
         </div>
-        {% endif %}
         {% endfor %}
 
         {% endif %}
@@ -58,31 +60,31 @@
                     <li class="mb-3">
                         {% if most_popular_posts_list.0.thumbnail_img %}
                         <div class="fig-container ">
-                            <a href="{% url 'posts:detail-post' year=most_popular_posts_list.0.created_on|date:'Y' month=most_popular_posts_list.0.created_on|date:'m' day=most_popular_posts_list.0.created_on|date:'d' slug=most_popular_posts_list.0.slug %}">
-                                <figure>
-                                    <div class="fig-holder relative h-56">
-                                        <img alt=" image thumbnail "
-                                             class="max-w-full min-h-full max-h-full block object-cover z-10"
-                                             src="{{ most_popular_posts_list.0.thumbnail_img.url }}">
-                                    </div>
+                                                        <a href="{% url 'posts:detail-post' year=most_popular_posts_list.0.created_on|date:'Y' month=most_popular_posts_list.0.created_on|date:'m' day=most_popular_posts_list.0.created_on|date:'d' slug=most_popular_posts_list.0.slug %}">
+                            <figure>
+                                <div class="fig-holder relative h-56">
+                                    <img alt=" image thumbnail "
+                                         class="max-w-full min-h-full max-h-full block object-cover z-10"
+                                         src="{{ most_popular_posts_list.0.thumbnail_img.url }}">
+                                </div>
 
-                                    <figcaption class="relative abolute bottom-0 w-full z-30">
-                                        <p class="absolute bottom-0 p-1 z-20 text-white opacity-100">
-                                            {{ most_popular_posts_list.0.title }}</p>
-                                    </figcaption>
-                                </figure>
-                            </a>
+                                <figcaption class="relative abolute bottom-0 w-full z-30">
+                                    <p class="absolute bottom-0 p-1 z-20 text-white opacity-100">
+                                        {{ most_popular_posts_list.0.title }}</p>
+                                </figcaption>
+                            </figure>
+                                                        </a>
                         </div>
                         {% endif %}
                     </li>
 
                     {% for post in most_popular_posts_list %}
-                    <a href="{% url 'posts:detail-post' year=post.created_on|date:'Y' month=post.created_on|date:'m' day=post.created_on|date:'d' slug=post.slug %}">
+                                        <a href="{% url 'posts:detail-post' year=post.created_on|date:'Y' month=post.created_on|date:'m' day=post.created_on|date:'d' slug=post.slug %}">
 
-                        <li class="list-disc ml-4 border-b-2 py-2 md:py-3 cursor-pointer hover:text-gray-700">
-                            {{ post.title }}
-                        </li>
-                    </a>
+                    <li class="list-disc ml-4 border-b-2 py-2 md:py-3 cursor-pointer hover:text-gray-700">
+                        {{ post.title }}
+                    </li>
+                                        </a>
 
 
                     {% endfor %}
@@ -111,31 +113,31 @@
                     {% if popular_this_month %}
                     <li class="mb-3">
                         <div class="fig-container">
-                            <a href="{% url 'posts:detail-post' year=popular_this_month.0.created_on|date:'Y' month=popular_this_month.0.created_on|date:'m' day=popular_this_month.0.created_on|date:'d' slug=popular_this_month.0.slug %}">
+                                                        <a href="{% url 'posts:detail-post' year=popular_this_month.0.created_on|date:'Y' month=popular_this_month.0.created_on|date:'m' day=popular_this_month.0.created_on|date:'d' slug=popular_this_month.0.slug %}">
 
-                                <figure>
-                                    <div class="fig-holder relative h-56">
-                                        <img alt="{{ popular_this_month.0.thumbnail_img }}"
-                                             class="max-w-full min-h-full max-h-full block object-cover z-10"
-                                             src="{{ popular_this_month.0.thumbnail_img.url }}">
-                                    </div>
+                            <figure>
+                                <div class="fig-holder relative h-56">
+                                    <img alt="{{ popular_this_month.0.thumbnail_img }}"
+                                         class="max-w-full min-h-full max-h-full block object-cover z-10"
+                                         src="{{ popular_this_month.0.thumbnail_img.url }}">
+                                </div>
 
-                                    <figcaption class="relative abolute bottom-0 w-full z-30">
-                                        <p class="absolute bottom-0 p-1 z-20 text-white opacity-100">
-                                            {{ popular_this_month.0.title }}</p>
-                                    </figcaption>
-                                </figure>
-                            </a>
+                                <figcaption class="relative abolute bottom-0 w-full z-30">
+                                    <p class="absolute bottom-0 p-1 z-20 text-white opacity-100">
+                                        {{ popular_this_month.0.title }}</p>
+                                </figcaption>
+                            </figure>
+                                                        </a>
                         </div>
                     </li>
 
                     {% for post in popular_this_month %}
-                    <a href="{% url 'posts:detail-post' year=post.created_on|date:'Y' month=post.created_on|date:'m' day=post.created_on|date:'d' slug=post.slug %}">
+                                        <a href="{% url 'posts:detail-post' year=post.created_on|date:'Y' month=post.created_on|date:'m' day=post.created_on|date:'d' slug=post.slug %}">
 
-                        <li class="list-disc ml-4 border-b-2 py-2 md:py-3 cursor-pointer hover:text-gray-700">
-                            {{ post.title }}
-                        </li>
-                    </a>
+                    <li class="list-disc ml-4 border-b-2 py-2 md:py-3 cursor-pointer hover:text-gray-700">
+                        {{ post.title }}
+                    </li>
+                                        </a>
                     {% endfor %}
                     {% endif %}
                 </ul>
@@ -162,20 +164,20 @@
                     {% if recent_except_three %}
                     <li class="mb-3">
                         <div class="fig-container">
-                            <a href="{% url 'posts:detail-post' year=popular_this_month.0.created_on|date:'Y' month=popular_this_month.0.created_on|date:'m' day=popular_this_month.0.created_on|date:'d' slug=popular_this_month.0.slug %}">
-                                <figure>
-                                    <div class="fig-holder relative h-56">
-                                        <img alt="image thumbnail"
-                                             class="max-w-full max-h-full block z-10"
-                                             src="{{ popular_this_month.0.thumbnail_img.url }}">
-                                    </div>
+                            <a href="#"></a>
+                            <figure>
+                                <div class="fig-holder relative h-56">
+                                    <img alt="image thumbnail"
+                                         class="max-w-full max-h-full block z-10"
+                                         src="{{ recent_except_three.0.thumbnail_img.url }}">
+                                </div>
 
-                                    <figcaption class="relative w-full z-40">
-                                        <p
-                                                class="absolute p-1 z-20 bottom-0 text-white opacity-100 overflow-hidden">
-                                            {{ recent_except_three.0.title }}</p>
-                                    </figcaption>
-                                </figure>
+                                <figcaption class="relative w-full z-40">
+                                    <p
+                                            class="absolute p-1 z-20 bottom-0 text-white opacity-100 overflow-hidden">
+                                        {{ recent_except_three.0.title }}</p>
+                                </figcaption>
+                            </figure>
                             </a>
                         </div>
                     </li>

@@ -1,5 +1,11 @@
 {% extends 'main.html' %}
 
+{% block og_meta %}
+
+
+
+{% endblock %}
+
 {% block title %}Home{% endblock %}
 
 {% block body %}
@@ -17,9 +23,14 @@
   };
 </script>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
-<div id="fb-root"></div>
 
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8">
+    FB.ui({
+  method: 'share',
+  href: 'https://developers.facebook.com/docs/'
+}, function(response){});
+</script>
 <!-- Load Facebook, Twitter SDK for JavaScript ENDS -->
 
 <!-- Detailed PAGE body starts -->
@@ -33,24 +44,20 @@
                                 <span class="footer-header cursor-pointer opacity-75 text-xs md:text-sm font-medium hover:text-gray-700">
                                 {{ detailed_post.category }}
                                 </span>
+
                     </div>
 
                     <p class="font-bold tracking-wide pb-3 md:text-3xl md:py-6">{{ detailed_post.title | safe }}</p>
 
+<!--                    social media share buttons-->
+
                     <div class="social-media-section flex md:my-6">
                         <div class="fb-share-button"
-                             data-href="{% url 'posts:detail-post' year=detailed_post.created_on|date:'Y' month=detailed_post.created_on|date:'m' day=detailed_post.created_on|date:'d' slug=detailed_post.slug %}"
-                             data-layout="button_count"
-                             data-size="large">
-
-                            <a class="fb-xfbml-parse-ignore"
-                               href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;
-                               src=sdkpreparse"
-                               target="_blank">
-                                <i
-                                        class="fab fa-facebook text-2xl text-blue-700 hover:text-gray-800 duration-500"></i>
-                            </a>
-                        </div>
+                             data-href="http://127.0.0.1:8000/post/2020/10/30/new-blog-with-django-ckdeitor/"
+                             data-layout="button" data-size="small">
+                            <a target="_blank"
+                               href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A8000%2Fpost%2F2020%2F10%2F30%2Fnew-blog-with-django-ckdeitor%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">
+                                Share</a></div>
 
                         <div class="mr-1" title="Instagram">
                             <a class="focus:outline-none" href="http://instagram.com"
