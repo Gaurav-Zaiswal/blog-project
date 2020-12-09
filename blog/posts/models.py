@@ -13,7 +13,6 @@ from users.models import Profile
 # from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 
-
 STATUS = (
     (0, "Draft"),
     (1, "Publish")
@@ -46,7 +45,7 @@ def thumbnail_path(instance, filename):
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    creator = models.ForeignKey(get_user_model(), on_delete= models.CASCADE)
+    creator = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
 
     class Meta:
         verbose_name_plural = "Categories"
@@ -67,7 +66,7 @@ class Post(models.Model):
     thumbnail_img = models.ImageField(upload_to=thumbnail_path, max_length=52, null=True, blank=True)
     slug = models.SlugField(max_length=200, null=True, blank=True)
     view_count = models.PositiveIntegerField(default=0)
-    updated_on = models.DateTimeField('Date and Time', auto_now= True)
+    updated_on = models.DateTimeField('Date and Time', auto_now=True)
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField('Status', choices=STATUS, default=0)
     # content = models.TextField()
@@ -84,7 +83,6 @@ class Post(models.Model):
             raise ValidationError('Please, pick present date and time...')
 
     def save(self, *args, **kwargs):
-
         self.slug = slugify(self.title)
         super(Post, self).save(*args, **kwargs)
 
@@ -95,4 +93,11 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('post_detail', kwargs={'slug': self.slug})
+        return reverse('posts:detail-post',
+                       kwargs={
+                           'year': str(self.created_on.year),
+                           'month': str(self.created_on.month),
+                           'day': str(self.created_on.day),
+                           'slug': self.slug,
+                       }
+                       )

@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'django_countries',
     'tempus_dominus',
+    # sitemaps
+    'django.contrib.sitemaps',
 ]
 
 MIDDLEWARE = [

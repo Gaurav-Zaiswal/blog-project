@@ -6,7 +6,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from django.contrib.flatpages import views as flat_views
+from django.contrib.sitemaps.views import sitemap
+from posts.sitemaps import PostSitemap
 
+sitemaps = {
+    'posts': PostSitemap,
+}
 
 urlpatterns = [
     path('', include('posts.urls', namespace='posts')),
@@ -22,13 +27,15 @@ urlpatterns = [
 
     # url for ckeditor
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    # url for sitemaps
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
+         name='post-sitemap')
 ]
 
 urlpatterns += [
     path('privacy-and-cookies/', flat_views.flatpage, {'url': '/privacy-and-cookies/'}, name='privacy'),
     path('terms-and-conditions/', flat_views.flatpage, {'url': '/terms-and-conditions/'}, name='terms'),
 ]
-
 
 # media file configuration for debug mode
 if settings.DEBUG:
