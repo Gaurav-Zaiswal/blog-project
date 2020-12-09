@@ -5,12 +5,13 @@ from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
 
-# from django.contrib.flatpages import views as flat_views
+from django.contrib.flatpages import views as flat_views
 from django.contrib.sitemaps.views import sitemap
-from posts.sitemaps import PostSitemap
+from posts.sitemaps import PostSitemap, FlatSitemap
 
 sitemaps = {
     'posts': PostSitemap,
+    'flatSitemap': FlatSitemap
 }
 
 urlpatterns = [
@@ -30,6 +31,10 @@ urlpatterns = [
     # url for sitemaps
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='website-map'),
+    # flatpage
+    path('pages/', include('django.contrib.flatpages.urls')),
+    path('terms/', flat_views.flatpage, {'url': '/terms/'}, name='terms'),
+    path('privacy/', flat_views.flatpage, {'url': '/privacy/'}, name='privacy'),
 ]
 
 # media file configuration for debug mode
