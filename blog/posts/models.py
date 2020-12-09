@@ -95,7 +95,7 @@ class Post(models.Model):
     def get_absolute_url(self):
         post_created_day = self.created_on.day
         if post_created_day in range(0, 10):
-            post_created_day = "0" + str(post_created_day)
+            post_created_day = "0" + str(post_created_day)  # 9 will be 09, as url req 2 digits
 
         return reverse('posts:detail-post',
                        kwargs={

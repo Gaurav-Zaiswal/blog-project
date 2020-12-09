@@ -1,11 +1,11 @@
 from django.contrib import admin
 from django.urls import include, path
 from django.contrib.auth import views as auth_views
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from django.conf import settings
 from django.conf.urls.static import static
 
-from django.contrib.flatpages import views as flat_views
+# from django.contrib.flatpages import views as flat_views
 from django.contrib.sitemaps.views import sitemap
 from posts.sitemaps import PostSitemap
 
@@ -29,12 +29,7 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     # url for sitemaps
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
-         name='post-sitemap')
-]
-
-urlpatterns += [
-    path('privacy-and-cookies/', flat_views.flatpage, {'url': '/privacy-and-cookies/'}, name='privacy'),
-    path('terms-and-conditions/', flat_views.flatpage, {'url': '/terms-and-conditions/'}, name='terms'),
+         name='website-map'),
 ]
 
 # media file configuration for debug mode
