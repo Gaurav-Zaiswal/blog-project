@@ -151,8 +151,7 @@
                             <p class="leading-relaxed tracking-wide">
                                 {{ post.content | safe | slice:":125"}}.....
 
-                                <a class="hover:underline"
-                                   href="{% url 'posts:detail-post' year=post.created_on|date:'Y' month=post.created_on|date:'m' day=post.created_on|date:'d' slug=post.slug %}">
+                                <a class="hover:underline" href="{{ post.get_absolute_url }}">
                                     <span class="font-medium "> read full story
 
                                         <!--                                        right arrow-->
@@ -190,7 +189,7 @@
                             >
                         </div>
                         {% endif %}
-                        <a href="{% url 'posts:detail-post' year=post.created_on|date:'Y' month=post.created_on|date:'m' day=post.created_on|date:'d' slug=post.slug %}">
+                        <a href="{{ post.get_absolute_url }}">
                             <p class="font-semibold opacity-75 md:text-md lg:text-lg">
                                 {{ post.title }}
                             </p>
@@ -218,7 +217,7 @@
                             <img alt="news thumbnail image" src="{{ post.thumbnail_img.url }}">
                         </div>
                         {% endif %}
-                        <a href="{% url 'posts:detail-post' year=post.created_on|date:'Y' month=post.created_on|date:'m' day=post.created_on|date:'d' slug=post.slug %}">
+                        <a href="{{ post.get_absolute_url }}">
                             <p class="font-semibold opacity-75 lg:text-lg ">{{ post.title }}</p>
                         </a>
                     </article>
