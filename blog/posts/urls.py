@@ -11,6 +11,6 @@ urlpatterns = [
          UpdatePostView.as_view(), name='update-post'),
     re_path(r'^post/(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<slug>[\w-]+)/remove$',
          DeletePostView.as_view(), name='remove-post'),
-    re_path(r'^post/(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<slug>[\w-]+)/$',
+    re_path(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<slug>[\w-]+)/$',
             DetailPostView.as_view(), name='detail-post'),
 ]
