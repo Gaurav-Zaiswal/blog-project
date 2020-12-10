@@ -1,5 +1,8 @@
 module.exports = {
-    purge: [],
+    purge: [
+        './templates/*.html',
+        './templates/**/*.html',
+    ],
     theme: {
         fontFamily: {
             display: ['Gilroy', 'sans-serif'],

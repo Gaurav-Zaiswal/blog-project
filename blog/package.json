@@ -4,12 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "tailwindcss build static/posts/css/styles.css -o static/posts/css/main.css",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start-dev": "tailwindcss build static/posts/css/styles.css -o static/posts/css/main.css",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-prod": "NODE_ENV=production tailwindcss build static/posts/css/styles.css -o static/posts/css/main.css"
+
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "tailwindcss": "^1.4.6"
+  },
+  "engines": {
+    "node": "15.x"
   }
 }
