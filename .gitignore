@@ -140,4 +140,4 @@ node_modules/
 *.jpeg
 
 # tailwind css
-*styles.css
+styles.css
