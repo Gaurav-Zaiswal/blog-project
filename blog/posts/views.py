@@ -48,7 +48,6 @@ class HomeView(ListView):
         context['recent_except_three'] = Post.objects.filter(status=1).order_by('-created_on')[3:10]
         return context
 
-
 @method_decorator(login_required(login_url='/login'), name='dispatch')
 class CreatePostView(SuccessMessageMixin, CreateView):
     model = Post
@@ -190,3 +189,10 @@ class DeletePostView(SuccessMessageMixin, BaseDeleteView):
     # template_name = "posts/delete_confirm_post.html"
     success_url = reverse_lazy('users:profile')
     success_message = 'Post has been deleted SuccessFully!'
+
+
+class LatestView(ListView):
+    model = Post
+    template_name = "posts/latest_post.html"
+    context_object_name = 'posts_list'
+    paginate_by = 2

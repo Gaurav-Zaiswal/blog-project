@@ -1,10 +1,13 @@
 from django.urls import path, re_path
 # from django.views.generic.dates import DateDetailView
-from .views import HomeView, CreatePostView, DetailPostView, UpdatePostView, DeletePostView
+from .views import HomeView, CreatePostView, DetailPostView, \
+    UpdatePostView, DeletePostView, LatestView
 from .models import Post
 
 app_name = 'posts'
 urlpatterns = [
+    path('', HomeView.as_view(), name='landingpage'),
+    path('latest/', LatestView.as_view(), name='latest'),
     path('', HomeView.as_view(), name='landingpage'),
     path('u/new-post/', CreatePostView.as_view(), name='new-post'),
     re_path(r'^post/(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<slug>[\w-]+)/edit/$',

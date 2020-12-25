@@ -1,0 +1,93 @@
+{% extends 'main.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+<!-- LANDING PAGE body starts -->
+<div class="main-wrapper px-3 py-3 md:px-6 md:py-6">
+    <!-- top 3 posts with image and captions -->
+    <div class="most-recent-container">
+        {% if posts_list %}
+        {% for post in posts_list %}
+
+        <div class="most-recent flex justify-between mb-4 md:mb-4">
+            {% if post.thumbnail_img %}
+
+            <div class="img-holder w-2/6 mr-2 md:mr-4">
+                <img alt="{{ post.thumbnail_img }}" src="{{ post.thumbnail_img.url }}">
+            </div>
+            {% endif %}
+
+            <div class="blog-intro-box w-full opacity-75">
+                <a href="{{ post.get_absolute_url }}">
+                    <p class="font-semibold md:text-xl md:font-bold lg:text-2xl">
+                        {{ post.title }}
+                    </p>
+                </a>
+                <div class="blog-into">
+                    <!-- category -->
+                    <span class="blog-into-category text-xs mr-2 uppercase md:mr-4 md:text-sm">{{ post.category }}</span>
+                    <span class="blog-into-author text-xs mr-2 capitalize md:mr-4 md:text-sm">
+                                {{ post.author.first_name }} {{ post.author.last_name }}</span>
+                    <span class="blog-into-date hidden text-xs md:inline-block md:text-sm">{{ post.created_on | date:"SHORT_DATE_FORMAT" }}</span>
+                    <div class="blog-brief mt-2 leading-relaxed tracking-wide hidden md:block">
+                        {{ post.content | safe | slice:":200" }} <span>...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% if is_paginated %}
+        <section class="paginator-sec flex justify-center">
+
+            {% if page_obj.number > 2 %}
+            <section class="first-page-btn">
+               <a href="?page=1">
+                    <div class="border-2 border-gray-800 text-gray-800 px-3 py-1 rounded hover:bg-gray-800 hover:text-white duration-150">
+                        <span>first</span></div>
+                </a>
+            </section>
+            {% endif %}
+
+            {% if page_obj.has_previous %}
+            <section class="previous-page-btn mx-1">
+                <a href="?page={{ page_obj.previous_page_number }}">
+                    <div class="border-2 border-gray-800 text-gray-800 px-3 py-1 rounded hover:bg-gray-800 hover:text-white duration-150">
+                        <span>previous</span></div>
+                </a>
+            </section>
+            {% endif %}
+
+            <section class="current-page">
+                <div class="bg-gray-800 text-white rounded px-3 py-1">{{ page_obj.number }}</div>
+            </section>
+
+            {% if page_obj.has_next %}
+            <section class="next-last mx-1">
+                <a href="?page={{ page_obj.next_page_number }}">
+                    <div class="border-2 border-gray-800 text-gray-800 px-3 py-1 rounded hover:bg-gray-800 hover:text-white duration-150">
+                        <span>next</span></div>
+                </a>
+            </section>
+            {% endif %}
+
+            {% if page_obj.number < paginator.num_pages %}
+            <section class="last-page-btn">
+               <a href="?page={{ paginator.num_pages }}">
+                    <div class="border-2 border-gray-800 text-gray-800 px-3 py-1 rounded hover:bg-gray-800 hover:text-white duration-150">
+                        <span>last</span></div>
+                </a>
+            </section>
+            {% endif %}
+        </section>
+        {% endif %}
+
+        {% endif %}
+    </div>
+
+</div>
+<!-- LANDING PAGE body ends here-->
+
+{% endblock %}
