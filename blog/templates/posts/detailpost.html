@@ -3,7 +3,6 @@
 {% block og_meta %}
 
 
-
 {% endblock %}
 
 {% block title %}Home{% endblock %}
@@ -13,23 +12,24 @@
 
 <!-- Load Facebook, Twitter SDK for JavaScript STARTS -->
 <script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId            : '3792526487437760',
-      autoLogAppEvents : true,
-      xfbml            : true,
-      version          : 'v8.0'
-    });
-  };
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '3792526487437760',
+            autoLogAppEvents: true,
+            xfbml: true,
+            version: 'v8.0'
+        });
+    };
 </script>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+<script async crossorigin="anonymous" defer src="https://connect.facebook.net/en_US/sdk.js"></script>
 
 
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8">
+<script async charset="utf-8" src="https://platform.twitter.com/widgets.js">
     FB.ui({
-  method: 'share',
-  href: 'https://developers.facebook.com/docs/'
-}, function(response){});
+        method: 'share',
+        href: 'https://developers.facebook.com/docs/'
+    }, function (response) {
+    });
 </script>
 <!-- Load Facebook, Twitter SDK for JavaScript ENDS -->
 
@@ -41,36 +41,38 @@
             <section class="detailed-post">
                 <div class="detailed-post-header-wrapper">
                     <div class="relative chategory inline-block my-4">
-                                <span class="footer-header cursor-pointer opacity-75 text-xs md:text-sm font-medium hover:text-gray-700">
-                                {{ detailed_post.category }}
-                                </span>
-
+                        <a href="{% url "posts:category-search" detailed_post.category %}">
+                            <span class="footer-header cursor-pointer opacity-75 text-xs md:text-sm font-medium hover:text-gray-700">
+                            {{ detailed_post.category }}
+                            </span>
+                        </a>
                     </div>
 
                     <p class="font-bold tracking-wide pb-3 md:text-3xl md:py-6">{{ detailed_post.title | safe }}</p>
 
-<!--                    social media share buttons-->
+                    <!--                    social media share buttons-->
 
                     <div class="social-media-section flex md:my-6">
                         <div class="fb-share-button"
                              data-href="http://127.0.0.1:8000/post/2020/10/30/new-blog-with-django-ckdeitor/"
                              data-layout="button" data-size="small">
-                            <a target="_blank"
-                               href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A8000%2Fpost%2F2020%2F10%2F30%2Fnew-blog-with-django-ckdeitor%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">
+                            <a class="fb-xfbml-parse-ignore"
+                               href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A8000%2Fpost%2F2020%2F10%2F30%2Fnew-blog-with-django-ckdeitor%2F&amp;src=sdkpreparse"
+                               target="_blank">
                                 Share</a>
                         </div>
 
-<!--                        <div class="mr-1" title="Instagram">-->
-<!--                            <a class="focus:outline-none" href="http://instagram.com"-->
-<!--                               rel="noopener noreferrer nofollowed"-->
-<!--                               target="_blank">-->
-<!--                                <i class="fas fa-envelope text-2xl text-purple-500 hover:text-gray-800 duration-500"></i>-->
-<!--                            </a>-->
-<!--                        </div>-->
+                        <!--                        <div class="mr-1" title="Instagram">-->
+                        <!--                            <a class="focus:outline-none" href="http://instagram.com"-->
+                        <!--                               rel="noopener noreferrer nofollowed"-->
+                        <!--                               target="_blank">-->
+                        <!--                                <i class="fas fa-envelope text-2xl text-purple-500 hover:text-gray-800 duration-500"></i>-->
+                        <!--                            </a>-->
+                        <!--                        </div>-->
                         <div class="mr-1 rounded" title="Twitter">
-                            <a href="https://twitter.com/intent/tweet?button_hashtag=button&ref_src=twsrc%5Etfw"
-                               class="twitter-button" data-size="large" data-dnt="true"
-                               data-show-count="false">
+                            <a class="twitter-button"
+                               data-dnt="true" data-show-count="false" data-size="large"
+                               href="https://twitter.com/intent/tweet?button_hashtag=button&ref_src=twsrc%5Etfw">
                                 <i class="fab fa-twitter text-2xl text-blue-500 hover:text-gray-800 duration-500"></i>
                             </a>
                         </div>

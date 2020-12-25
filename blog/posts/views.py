@@ -15,7 +15,7 @@ from django.urls import reverse_lazy
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 
-from .models import Post
+from .models import Post, Category
 from .forms import PostForm
 from users.models import Profile
 
@@ -196,3 +196,18 @@ class LatestView(ListView):
     template_name = "posts/latest_post.html"
     context_object_name = 'posts_list'
     paginate_by = 2
+
+
+class SearchView(ListView):
+    model = Post
+    template_name = "posts/search_post.html"
+    context_object_name = 'posts_list'
+    paginate_by = 2
+
+    def get_queryset(self):
+        """
+        Post needs number as category.So we need to fetch pk from model 'category' using url argument which is a string
+        """
+        qs = super().get_queryset()
+        c = Category.objects.get(name=self.kwargs['category'])
+        return qs.filter(Q(category=c.pk) & Q(status=1)).order_by('-created_on')
