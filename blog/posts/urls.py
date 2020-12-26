@@ -7,7 +7,7 @@ from .models import Post
 app_name = 'posts'
 urlpatterns = [
     path('', HomeView.as_view(), name='landingpage'),
-    path('latest/', LatestView.as_view(), name='latest'),
+    path('news/latest/', LatestView.as_view(), name='latest'),
     path('u/new-post/', CreatePostView.as_view(), name='new-post'),
     re_path(r'^post/(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<slug>[\w-]+)/edit/$',
          UpdatePostView.as_view(), name='update-post'),
