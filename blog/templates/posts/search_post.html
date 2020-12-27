@@ -1,3 +1,18 @@
 {% extends './latest_post.html' %}
 
 {% block title %}Home{% endblock %}
+
+{% block latest_page_body %}
+<div class="search-post-wrapper">
+
+    <section class="search-category inline-block relative ml-3 my-6 lg:ml-6 lg:text-2xl">
+    <span class="footer-header opacity-75 font-medium">
+                            {{ posts_list.0.category }}
+    </span>
+    </section>
+
+    <section class="search-news-body">
+        {{ block.super }}
+    </section>
+</div>
+{% endblock %}

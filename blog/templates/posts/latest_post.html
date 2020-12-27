@@ -30,10 +30,13 @@
                         </a>
                         <div class="blog-into">
                             <!-- category -->
-                            <span class="blog-into-category text-xs mr-2 uppercase md:mr-4 md:text-sm">{{ post.category }}</span>
-                            <span class="blog-into-author text-xs mr-2 capitalize md:mr-4 md:text-sm">
+                            <span class="blog-into-date text-xs mr-2 uppercase md:mr-4 md:text-sm">{{ post.category }}</span>
+
+                            <!-- span class="blog-into-author text-xs mr-2 capitalize md:mr-4 md:text-sm">
                                         {{ post.author.first_name }} {{ post.author.last_name }}</span>
-                            <span class="blog-into-date hidden text-xs md:inline-block md:text-sm">{{ post.created_on | date:"SHORT_DATE_FORMAT" }}</span>
+                             -->
+                            <span><i class="far fa-calendar-alt"></i></span>
+                            <span class="hidden text-xs md:inline-block md:text-sm">{{ post.created_on | date:"SHORT_DATE_FORMAT" }}</span>
                             <div class="blog-brief mt-2 leading-relaxed tracking-wide hidden md:block">
                                 {{ post.content | safe | slice:":200" }} <span>...</span>
                             </div>
