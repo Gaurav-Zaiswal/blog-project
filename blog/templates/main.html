@@ -13,7 +13,7 @@
     <script src="{% static 'posts/js/main.js' %}"></script>
 
     <!-- font-awesome cdn  -->
-<!--    <script src="https://kit.fontawesome.com/de0476f8c8.js" crossorigin="anonymous"></script>-->
+    <script src="https://kit.fontawesome.com/de0476f8c8.js" crossorigin="anonymous"></script>
     <title>{% block title %}Landing Page{% endblock %}</title>
     <style>
         {% block designing %} {% endblock %}
@@ -101,12 +101,30 @@
                     </a>
                 </li>
                 <li class="mr-6 transform hover:scale-110 duration-700 ">
-                    <a class="text-gray-800 text-xl font-semibold active:text-indigo-600 hover:text-indigo-600 focus:outline-none" href="#">Latest</a>
+                    <a class="text-gray-800 font-semibold active:text-indigo-600 hover:text-indigo-600 focus:outline-none"
+                       href="{% url 'posts:latest' %}">Latest</a>
                 </li>
+                <li class="mr-6 transform hover:scale-110 duration-700">
+                    <a class="text-gray-800 font-semibold hover:text-indigo-600 focus:outline-none" href="#">Trending</a>
+                </li>
+                <!--
                 <li class="mr-6 transform hover:scale-110 duration-700">
                     <a class="text-gray-800 text-xl font-semibold hover:text-indigo-600 focus:outline-none" href="#">Popular</a>
                 </li>
+                -->
+                <li class="mr-6 transform hover:scale-110 duration-700">
+                    <a class="text-gray-800 font-semibold hover:text-indigo-600 focus:outline-none" href="#">Upcoming Movies</a>
+                </li>
+                <li class="mr-6 transform hover:scale-110 duration-700">
+                    <a class="text-gray-800 font-semibold hover:text-indigo-600 focus:outline-none" href="#">Reviews</a>
+                </li>
+                <li class="mr-6 transform hover:scale-110 duration-700">
+                    <a class="text-gray-800 font-semibold hover:text-indigo-600 focus:outline-none"
+                       href="{% url 'posts:category-search' 'gossip' %}">Gossip</a>
+                </li>
+
                 <!-- dropdown menu for movies  -->
+                <!--
                 <li class="movie-dropdown-menu mr-6">
                     <a class="text-gray-800 text-xl font-semibold hover:text-indigo-600 cursor-pointer focus:outline-none">Category
                             <span class="text-black font-normal">&#43;</span></a>
@@ -122,7 +140,9 @@
                             <a href="#" class="block whitespace-no-wrap transform hover:scale-110 duration-500 focus:outline-none">Other</a></li>
                     </ul>
                 </li>
+                -->
                 <!-- dropdown menu for more  -->
+                <!--
                 <li class="movie-dropdown-menu mr-6">
                     <a class="text-gray-800 text-xl font-semibold hover:text-indigo-600" href="#">More <span class="text-black font-normal">&#43;</span></a>
                     <ul class="drop-down-menu-movie clear-dropdown rounded list-none hidden p-0 m-0 bg-indigo-500">
@@ -134,6 +154,7 @@
                             <a href="#" class="block whitespace-no-wrap transform hover:scale-110 duration-500 focus:outline-none">Television</a></li>
                     </ul>
                 </li>
+                -->
             </ul>
             <div>
                 <!-- empty div just to make flex justify-between to work fine -->
