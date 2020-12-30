@@ -21,13 +21,31 @@ from users.models import Profile
 
 
 now_today = datetime.datetime.now()
-one_month_back_from_today = now_today - timezone.timedelta(days=32)
-three_month_back_from_today = now_today - timezone.timedelta(days=100)
+fifteen_days_back = now_today - timezone.timedelta(days=15)
+one_month_back = now_today - timezone.timedelta(days=32)
+three_months_back = now_today - timezone.timedelta(days=100)
 
 # setting up local timezone
 now_today = make_aware(now_today)
-one_month_back_from_today = make_aware(one_month_back_from_today)
-three_month_back_from_today = make_aware(three_month_back_from_today)
+one_month_back = make_aware(one_month_back)
+fifteen_days_back = make_aware(fifteen_days_back)
+three_months_back = make_aware(three_months_back)
+
+
+def compute_trend(post_list):
+    trending_posts = {}
+    for post in post_list:
+        trending_posts[post] = post.view_count
+
+    sorted_trending_posts = {k: v for k, v in sorted(trending_posts.items(),
+                      key=lambda item: item[1],
+                      reverse=True)}
+
+    trending_posts_list = []
+    for k in sorted_trending_posts.keys():
+        trending_posts_list.append(k)
+
+    return trending_posts_list
 
 
 class HomeView(ListView):
@@ -42,7 +60,7 @@ class HomeView(ListView):
         context = super(HomeView, self).get_context_data(**kwargs)
         context['recent_three'] = Post.objects.filter(status=1).order_by('-created_on')[:3]
         context['popular_this_month'] = Post.objects.filter(
-            Q(status=1) & Q(created_on__gte=one_month_back_from_today) & Q(created_on__lt=now_today)
+            Q(status=1) & Q(created_on__gte=one_month_back) & Q(created_on__lt=now_today)
         ).order_by('view_count')[:6]
         context['most_popular_posts_list'] = Post.objects.filter(status=1).order_by('view_count')[:6]
         context['recent_except_three'] = Post.objects.filter(status=1).order_by('-created_on')[3:10]
@@ -116,7 +134,7 @@ class DetailPostView(DateDetailView):
         if self.object:
             context['posts_you_may_like'] = Post.objects.filter(
                 Q(status=1) & Q(category=post_category) &
-                Q(created_on__gte=three_month_back_from_today) &
+                Q(created_on__gte=three_months_back) &
                 Q(created_on__lt=now_today)
             ).order_by('view_count')[:6]
 
@@ -211,3 +229,14 @@ class SearchView(ListView):
         qs = super().get_queryset()
         c = Category.objects.get(name=self.kwargs['category'])
         return qs.filter(Q(category=c.pk) & Q(status=1)).order_by('-created_on')
+
+
+class TrendingNewsView(ListView):
+    model = Post
+    template_name = "posts/trending_posts.html"
+    context_object_name = 'posts_list'
+    paginate_by = 2
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(Q(status=1) & Q(created_on__gte=three_months_back)).order_by('view_count')
