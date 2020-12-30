@@ -240,3 +240,7 @@ class TrendingNewsView(ListView):
     def get_queryset(self):
         qs = super().get_queryset()
         return qs.filter(Q(status=1) & Q(created_on__gte=three_months_back)).order_by('view_count')
+
+
+class ReviewListView(ListView):
+    pass
