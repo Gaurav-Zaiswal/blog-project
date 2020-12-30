@@ -19,7 +19,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'posts.apps.PostsConfig',
-    'movies.apps.PostsConfig',
+    # 'movies.apps.PostsConfig',
 
     # defaults
     'django.contrib.admin',
