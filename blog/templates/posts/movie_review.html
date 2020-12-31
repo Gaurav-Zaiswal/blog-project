@@ -1,10 +1,55 @@
 {% extends 'main.html' %}
 {% block title %} Review {% endblock %}
+
 {% block main-header %}
 
 {% load static %}
 
 <link href="{% static 'users/css/style.css' %}" rel="stylesheet">
+
+<style>
+    .card-container{
+        cursor: pointer;
+    }
+    .img-container {
+        position: relative;
+        height: 400px;
+        overflow: hidden;
+    }
+
+    .img-container img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+
+    }
+
+    .card-overlay-content {
+        position: absolute;
+        top: -100%;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        /*background: rgba(255, 0 ,0 , .7);*/
+        background: rgba(0, 0, 0, .6);
+        transition: 0.1s;
+    }
+
+    .card-text-wrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .card-container:hover .card-overlay-content{
+        top:0;
+        left:0;
+        width:100%;
+        height: 100%;
+    }
+
+</style>
 
 {% endblock %}
 
@@ -68,43 +113,55 @@
 
     <!--    grid for movie cards starts-->
     <div class="row row-cols-2 justify-center my-4">
-        <div class="col-sm-4 shadow-lg px-0 py-0 m-2">
-            <div class="card p-0 border-0 bg-dark text-white">
+        <div class="card-container col-sm-4 shadow-lg px-0 py-0 m-2"> <!-- container -->
+            <div class="img-container p-0 border-0 bg-dark text-white"> <!-- img box -->
                 <img alt="..." class="card-img" src="/media/uploads/2020/10/30/87e58bde68ba4c7180673dc34f555d7d.jpeg">
-                <div class="card-img-overlay">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.</p>
+                <div class="card-overlay-content"> <!-- overlay content -->
+                    <div class="card-text-wrapper">
+                        <h5 class="card-title text-white ">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional content. This content is a little bit longer.</p>
+                    </div>
+
                 </div>
             </div>
         </div>
-        <div class="col-sm-4 shadow-lg px-0 py-0 m-2">
-            <div class="card p-0 border-0 bg-dark text-white">
+        <div class="card-container col-sm-4 shadow-lg px-0 py-0 m-2"> <!-- container -->
+            <div class="img-container p-0 border-0 bg-dark text-white"> <!-- img box -->
                 <img alt="..." class="" src="/media/uploads/2020/07/31/633b1f37bb574b3cbfcafe9d2141486b.jpg">
-                <div class="card-img-overlay">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.</p>
+                <div class="card-overlay-content"> <!-- overlay content -->
+                    <div class="card-text-wrapper">
+                        <h5 class="card-title text-white ">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional content. This content is a little bit longer.</p>
+                    </div>
+
                 </div>
             </div>
         </div>
-        <div class="col-sm-4 shadow-lg px-0 py-0 m-2">
-            <div class="card p-0 border-0 bg-dark text-white">
+        <div class="card-container col-sm-4 shadow-lg px-0 py-0 m-2"> <!-- container -->
+            <div class="img-container p-0 border-0 bg-dark text-white"> <!-- img box -->
                 <img alt="..." class="card-img" src="/media/uploads/2020/07/31/5d3c9e5f034f4801a075308baf8bb36f.jpg">
-                <div class="card-img-overlay">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.</p>
+                <div class="card-overlay-content"> <!-- overlay content -->
+                    <div class="card-text-wrapper">
+                        <h5 class="card-title text-white ">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional content. This content is a little bit longer.</p>
+                    </div>
+
                 </div>
             </div>
         </div>
-        <div class="col-sm-4 shadow-lg px-0 py-0 m-2">
-            <div class="card p-0 border-0 bg-dark text-white">
+        <div class="card-container col-sm-4 shadow-lg px-0 py-0 m-2"> <!-- container -->
+            <div class="img-container p-0 border-0 bg-dark text-white"> <!-- img box -->
                 <img alt="..." class="card-img" src="/media/uploads/2020/10/30/b237fa7228ff4b4d8a53e6c730083425.jpeg">
-                <div class="card-img-overlay">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.</p>
+                <div class="card-overlay-content"> <!-- overlay content -->
+                    <div class="card-text-wrapper">
+                        <h5 class="card-title text-white ">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional content. This content is a little bit longer.</p>
+                    </div>
+
                 </div>
             </div>
         </div>
