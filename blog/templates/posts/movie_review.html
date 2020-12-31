@@ -8,9 +8,10 @@
 <link href="{% static 'users/css/style.css' %}" rel="stylesheet">
 
 <style>
-    .card-container{
+    .card-container {
         cursor: pointer;
     }
+
     .img-container {
         position: relative;
         height: 400px;
@@ -21,7 +22,7 @@
         height: 100%;
         width: 100%;
         object-fit: cover;
-
+        transition: 0.4s;
     }
 
     .card-overlay-content {
@@ -31,8 +32,8 @@
         width: 100%;
         height: 100%;
         /*background: rgba(255, 0 ,0 , .7);*/
-        background: rgba(0, 0, 0, .6);
-        transition: 0.1s;
+        /*background: rgba(0, 0, 0, .6);*/
+        transition: 0.4s;
     }
 
     .card-text-wrapper {
@@ -42,11 +43,19 @@
         transform: translate(-50%, -50%);
     }
 
-    .card-container:hover .card-overlay-content{
-        top:0;
-        left:0;
-        width:100%;
+    .card-container:hover .card-overlay-content {
+        top: 0;
+        left: 0;
+        width: 100%;
         height: 100%;
+        background: rgba(0, 0, 0, .6);
+
+    }
+
+    .card-container:hover .img-container img {
+        -ms-transform: scale(1.15); /* IE 9 */
+        -webkit-transform: scale(1.15); /* Safari 3-8 */
+        transform: scale(1.15);
     }
 
 </style>
