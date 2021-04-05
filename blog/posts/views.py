@@ -244,6 +244,6 @@ class TrendingNewsView(ListView):
 
 class ReviewListView(ListView):
     model = Post
-    template_name = "posts/movie_review.html"
+    template_name = "movies/movie_review.html"
     context_object_name = 'posts_list'
     paginate_by = 2

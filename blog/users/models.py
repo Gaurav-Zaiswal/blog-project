@@ -45,7 +45,7 @@ class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 	image = models.ImageField(
-		default='default_pic_author.jpg',
+		default='/author_pictures/default_pic_author.jpg',
 		upload_to=profile_pic_path)
 	dob = models.DateField(auto_now=False, auto_now_add=False, null=True, validators=[validate_age])
 	country = CountryField(blank_label='(select country)', null=True)

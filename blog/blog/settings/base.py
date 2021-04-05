@@ -12,7 +12,7 @@ BASE_DIR = os.path.dirname(
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = '9^8*z7c....'
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'agv=$d+=6^b%y#t9*yq@e$4*z3!aumf8lduq2rp)j(-=+8m%3e')
 
 # Application definition
 

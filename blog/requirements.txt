@@ -5,6 +5,5 @@ django-countries==6.1.3
 django-js-asset==1.2.2
 django-tempus-dominus==5.1.2.13
 Pillow==7.2.0
-pkg-resources==0.0.0
 pytz==2020.1
 sqlparse==0.3.1

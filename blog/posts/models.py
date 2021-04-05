@@ -93,15 +93,20 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        post_created_day = self.created_on.day
-        if post_created_day in range(0, 10):
-            post_created_day = "0" + str(post_created_day)  # 9 will be 09, as url req 2 digits
+        if self.created_on.day in range(0, 10):
+            self.created_on.day = "0" + str(self.created_on.day)  # 9 will be 09, as url req 2 digits
+
+        if self.created_on.month in range(0, 10):
+            self.created_month = "0" + str(self.created_on.month)
 
         return reverse('posts:detail-post',
                        kwargs={
                            'year': str(self.created_on.year),
-                           'month': str(self.created_on.month),
-                           'day': post_created_day if type(post_created_day) == str else str(post_created_day),
+                           'month': self.created_on.month if type(self.created_on.day) == str else str(self.created_month),
+                           'day': self.created_on.day if type(self.created_on.day) == str else str(self.created_on.day),
                            'slug': self.slug,
                        }
                        )
+
+    # def get_absolute_url(self):
+    #     return "/"
