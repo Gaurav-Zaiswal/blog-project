@@ -1,4 +1,5 @@
 import datetime
+from django.http.response import JsonResponse
 
 from django.utils import timezone
 from django.utils.timezone import make_aware
@@ -67,3 +68,17 @@ class GetMoviesList(ListView):
         context['recent_movies'] = Movie.objects.filter(status=1).order_by('-created_on')
         # print(context)
         return context
+
+
+def search_movies(request):
+    movie_title = request.GET.get('movie_title')
+    print(movie_title)
+    payload=[]
+    if movie_title:
+        movie_title_objects = Movie.objects.filter(title__icontains=movie_title)
+        for movie_title in movie_title_objects:
+            payload.append(movie_title.title)
+        
+        return JsonResponse({'status': 200, 'data': payload})  
+    return JsonResponse({'status': 500})
+

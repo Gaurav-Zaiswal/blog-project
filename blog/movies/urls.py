@@ -11,5 +11,5 @@ urlpatterns = [
     # path('update/movie/', AddMovieView.as_view(), name='add_movie'),
     path('new/review/', CreateMovieReviewView.as_view(), name='add_review'),
     path('review/', GetMoviesList.as_view(), name='movie-list'),
-
+    
 ]
