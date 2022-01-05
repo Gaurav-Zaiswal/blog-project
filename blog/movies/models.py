@@ -49,15 +49,12 @@ class Movie(models.Model):
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
 
     title = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=70, null=True, blank=True)
+    imdb_id = models.CharField(max_length=10)
+    # slug = models.SlugField(max_length=70, null=True, blank=True)
     poster = models.ImageField(upload_to=thumbnail_path, max_length=52, null=True, blank=True)
     updated_on = models.DateTimeField('Date and Time', auto_now=True)
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField('Status', choices=STATUS, default=0)
-    # content = models.TextField()
-
-    # implementing ckeditor app's richtextfield on content
-    review = RichTextUploadingField()
 
     # validating created_on, so that user cannot select past date
     # also known as field level validation
@@ -67,9 +64,9 @@ class Movie(models.Model):
         if self.created_on and self.created_on < now:
             raise ValidationError('Please, pick present date and time...')
 
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
-        super(Movie, self).save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     self.slug = slugify(self.title)
+    #     super(Movie, self).save(*args, **kwargs)
 
     class Meta:
         ordering = ['-created_on']
@@ -89,56 +86,17 @@ class Movie(models.Model):
                            'day': post_created_day if type(post_created_day) == str else str(post_created_day),
                            'slug': self.slug,
                        }
-                       )
+        )
 
 
 class MovieRating(models.Model):
-    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    movie = models.OneToOneField(Movie, on_delete=models.CASCADE, primary_key=True)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)  # foreign key
+    review = RichTextUploadingField()
     updated_on = models.DateTimeField('Date and Time', auto_now=True)
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField('Status', choices=STATUS, default=0)
-
-    plot = models.models.DecimalField(
-        max_digits=2,
-        decimal_places=1,
-        default=0)
-    theme = models.models.DecimalField(
-        max_digits=2,
-        decimal_places=1,
-        default=0)
-    acting = models.models.DecimalField(
-        max_digits=2,
-        decimal_places=1,
-        default=0)
-    direction = models.models.DecimalField(
-        max_digits=2,
-        decimal_places=1,
-        default=0)
-    bg_music = models.models.DecimalField(
-        max_digits=2,
-        decimal_places=1,
-        default=0)
-    cinematography = models.models.DecimalField(
-        max_digits=2,
-        decimal_places=1,
-        default=0)
-    production_design = models.models.DecimalField(
-        max_digits=2,
-        decimal_places=1,
-        default=0)
-    pace = models.models.DecimalField(
-        max_digits=2,
-        decimal_places=1,
-        default=0)
-    editing = models.models.DecimalField(
-        max_digits=2,
-        decimal_places=1,
-        default=0)
-    dialogue = models.models.DecimalField(
-        max_digits=2,
-        decimal_places=1,
-        default=0)
 
     # validating created_on, so that user cannot select past date
     # also known as field level validation
@@ -147,11 +105,9 @@ class MovieRating(models.Model):
 
         if self.created_on and self.created_on < now:
             raise ValidationError('Please, pick present date and time...')
-    #validate all ratings so that they lies in 1 to 10
 
     class Meta:
         ordering = ['-created_on']
 
     def __str__(self):
         return self.title
-

@@ -1,0 +1,13 @@
+{% extends 'main_dashboard.html' %}
+
+{% block title %}New Movie/Series{% endblock %}
+
+{% block body %}
+{% if form %}
+<form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" class="btn btn-success">Save</button>
+</form>
+{% endif %}
+{% endblock %}

@@ -1,15 +1,51 @@
-{% extends 'users/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
 
-{% block title %}Login{% endblock %}
+  {% load static %}
 
-{% block content %}
-<h2>Login</h2>
-<form method="post" action="{% url 'login' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-    <input type="hidden" name="next" value="{{ next }}">
-  <button type="submit">Login</button>
-</form>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block og_meta %}{% endblock %}
 
-</form>
-{% endblock %}
+    <!--    static files links-->
+    <link rel="stylesheet" href="{% static 'posts/css/main.css' %}">
+    <script src="{% static 'posts/js/main.js' %}"></script>
+
+    <!-- font-awesome cdn  -->
+    <script src="https://kit.fontawesome.com/de0476f8c8.js" crossorigin="anonymous"></script>
+
+</head>
+<body class="h-screen flex justify-center items-center bg-gray-300 ">
+    <main class="w-1/4 h-1/4 bg-gray-800 p-4">
+      <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <label for="email" class="text-gray-300">{{ form.username.label }}</label> <br>
+        {{ form.username }} <br>
+        <!-- <input type="email" name="email" id="email" class="p-2 w-full my-2"> <br> -->
+        <label for="password" class="text-gray-300">{{ form.password.label }}</label> <br>
+        {{ form.password }}
+        <!-- <input type="password" name="password" id="password" class="p-2 w-full my-2"> <br> -->
+
+        <button type="submit" class="p-2 bg-green-600 w-full my-2">Login</button>
+      </form>
+    </main>
+
+    <script>
+      const emailField = document.querySelector("#id_username");
+      const passwordField = document.querySelector("#id_password");
+
+      cssClasses = ['w-full', 'p-2', 'my-2']
+      
+      cssClasses.forEach(element => {
+        emailField.classList.add(element);
+        passwordField.classList.add(element);
+      });
+    </script>
+</body>
+</html>

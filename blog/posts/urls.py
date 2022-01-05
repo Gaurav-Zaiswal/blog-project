@@ -1,4 +1,7 @@
+
 from django.urls import path, re_path
+
+
 # from django.views.generic.dates import DateDetailView
 from .views import HomeView, CreatePostView, DetailPostView, \
     UpdatePostView, DeletePostView, LatestView, SearchView, \
@@ -10,8 +13,9 @@ urlpatterns = [
     path('', HomeView.as_view(), name='landingpage'),
     path('news/latest/', LatestView.as_view(), name='latest'),
     path('news/trending/', TrendingNewsView.as_view(), name='trending'),
-    path('review/', ReviewListView.as_view(), name='review'),
-    path('u/new-post/', CreatePostView.as_view(), name='new-post'),
+    # path('review/', ReviewListView.as_view(), name='review'),
+    # path('review/', GetMoviesList.as_view(), name='review'),
+    path('u/new-post/', CreatePostView.as_view(), name='movie-list-view'),
     re_path(r'^post/(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<slug>[\w-]+)/edit/$',
          UpdatePostView.as_view(), name='update-post'),
     re_path(r'^post/(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<slug>[\w-]+)/remove$',

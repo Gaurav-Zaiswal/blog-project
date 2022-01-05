@@ -1,0 +1,20 @@
+{% extends 'main_dashboard.html' %}
+
+{% block title %}New new review{% endblock %}
+
+{% block body %}
+
+{% if form %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.media }}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Save</button> 
+</form>
+{% endif %}
+
+<script>
+    const review = document.querySelector("#id_review");
+    review.classList.add('w-50');
+</script>
+{% endblock %}

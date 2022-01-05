@@ -8,13 +8,17 @@
 <link href="{% static 'users/css/style.css' %}" rel="stylesheet">
 
 <style>
+    body {
+        background-color: white;
+    }
+
     .card-container {
         cursor: pointer;
     }
 
     .img-container {
         position: relative;
-        height: 400px;
+        height: 340px;
         overflow: hidden;
     }
 
@@ -53,29 +57,18 @@
     }
 
     .card-container:hover .img-container img {
-        -ms-transform: scale(1.15); /* IE 9 */
-        -webkit-transform: scale(1.15); /* Safari 3-8 */
+        -ms-transform: scale(1.15);
+        /* IE 9 */
+        -webkit-transform: scale(1.15);
+        /* Safari 3-8 */
         transform: scale(1.15);
     }
-
 </style>
 
 {% endblock %}
 
 {% block body %}
 <section class="review-container">
-    <nav class="sticky-top">
-        <div class="container-fluid d-flex justify-content-between py-2">
-            <span class="navbar-brand inline align-content-center"></span>
-            <form class="d-flex ">
-                <input aria-label="Search" class="form-control me-2 mx-1" placeholder="Search Movie/Series"
-                       type="search">
-                <button class="btn bg-primary text-white" type="submit">Search</button>
-            </form>
-        </div>
-    </nav>
-
-
     <!--    crousel starts -->
     <div class="carousel slide" data-bs-ride="carousel" id="carouselExampleCaptions">
         <ol class="carousel-indicators">
@@ -86,7 +79,7 @@
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img alt="..." class="d-block w-100"
-                     src="/media/uploads/2020/10/30/87e58bde68ba4c7180673dc34f555d7d.jpeg">
+                    src="/media/uploads/2020/10/30/87e58bde68ba4c7180673dc34f555d7d.jpeg">
                 <div class="carousel-caption d-none d-md-block bg-info opacity-75">
                     <h5>First slide label</h5>
                     <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
@@ -94,7 +87,7 @@
             </div>
             <div class="carousel-item">
                 <img alt="..." class="d-block w-100"
-                     src="/media/uploads/2020/07/31/633b1f37bb574b3cbfcafe9d2141486b.jpg">
+                    src="/media/uploads/2020/07/31/633b1f37bb574b3cbfcafe9d2141486b.jpg">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Second slide label</h5>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -102,7 +95,7 @@
             </div>
             <div class="carousel-item">
                 <img alt="..." class="d-block w-100"
-                     src="/media/uploads/2020/10/30/b237fa7228ff4b4d8a53e6c730083425.jpeg">
+                    src="/media/uploads/2020/10/30/b237fa7228ff4b4d8a53e6c730083425.jpeg">
                 <div class="carousel-caption d-none d-md-block ">
                     <h5>Third slide label</h5>
                     <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
@@ -120,62 +113,54 @@
     </div>
     <!--    crousel ends-->
 
-    <!--    grid for movie cards starts-->
-    <div class="row row-cols-2 justify-center my-4">
-        <div class="card-container col-sm-4 shadow-lg px-0 py-0 m-2"> <!-- container -->
-            <div class="img-container p-0 border-0 bg-dark text-white"> <!-- img box -->
-                <img alt="..." class="card-img" src="/media/uploads/2020/10/30/87e58bde68ba4c7180673dc34f555d7d.jpeg">
-                <div class="card-overlay-content"> <!-- overlay content -->
-                    <div class="card-text-wrapper">
-                        <h5 class="card-title text-white ">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
-                    </div>
+    <section>
+        <div class="my-4 flex justify-center">
+            <span class="footer-header inline relative text-xl pb-1 text-gray-800">Our Latest Reviews</span>
+        </div>
+        <!--    grid for movie cards starts-->
+        <div class="row justify-center my-4">
+            {% for movie in recent_movies %}
+            
+            <div class="card-container col-sm-3 shadow-lg px-0 py-0 m-2">
+                <!-- container -->
+                <div class="img-container p-0 border-0 bg-dark text-white">
+                    <!-- img box -->
+                    <img alt="..." class="card-img"
+                        src="/media/uploads/2020/10/30/87e58bde68ba4c7180673dc34f555d7d.jpeg">
+                    <div class="card-overlay-content">
+                        <!-- overlay content -->
+                        <div class="card-text-wrapper">
+                            <h5 id="movie-title" class="card-title text-white fs-1">{{ movie.title | capfirst }}</h5>
 
+                            <span class="card-text">IMDB:</span> <span id="imdb-star" class="imdb-star">3.8</span> <br>
+                            <span class="card-text">Metacritic:</span> <span id="meta-score" class= "meta-score">6</span>
+                        </div>
+
+                    </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
-        <div class="card-container col-sm-4 shadow-lg px-0 py-0 m-2"> <!-- container -->
-            <div class="img-container p-0 border-0 bg-dark text-white"> <!-- img box -->
-                <img alt="..." class="" src="/media/uploads/2020/07/31/633b1f37bb574b3cbfcafe9d2141486b.jpg">
-                <div class="card-overlay-content"> <!-- overlay content -->
-                    <div class="card-text-wrapper">
-                        <h5 class="card-title text-white ">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="card-container col-sm-4 shadow-lg px-0 py-0 m-2"> <!-- container -->
-            <div class="img-container p-0 border-0 bg-dark text-white"> <!-- img box -->
-                <img alt="..." class="card-img" src="/media/uploads/2020/07/31/5d3c9e5f034f4801a075308baf8bb36f.jpg">
-                <div class="card-overlay-content"> <!-- overlay content -->
-                    <div class="card-text-wrapper">
-                        <h5 class="card-title text-white ">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="card-container col-sm-4 shadow-lg px-0 py-0 m-2"> <!-- container -->
-            <div class="img-container p-0 border-0 bg-dark text-white"> <!-- img box -->
-                <img alt="..." class="card-img" src="/media/uploads/2020/10/30/b237fa7228ff4b4d8a53e6c730083425.jpeg">
-                <div class="card-overlay-content"> <!-- overlay content -->
-                    <div class="card-text-wrapper">
-                        <h5 class="card-title text-white ">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
+    </section>
 </section>
+
+<script>
+    // store imdb_id in an array 
+    // for each array value, call the imdb api to fetch ratings
+    var imdb_ids = [
+        {% for movie in recent_movies %}
+    {% if not forloop.first %}, {% endif %}
+
+    {
+        imdb_id: "{{ movie.imdb_id }}"
+    }
+    {% endfor %}
+    ];
+
+    // console.log("imdb ids: ");
+    // console.log(imdb_ids);
+
+</script>
 
 <!--bootstrap scripts starts-->
 <script src="{% static 'users/js/jquery.min.js' %}"></script>
@@ -183,4 +168,8 @@
 <script src="{% static 'users/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'users/js/main.js' %}"></script>
 <!--bootstrap script ends -->
+
+<script src="{% static 'movies/js/script.js' %}"></script>
+
+
 {% endblock %}

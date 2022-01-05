@@ -61,7 +61,6 @@ class Post(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='blog_posts')
-
     title = models.CharField(max_length=200)
     thumbnail_img = models.ImageField(upload_to=thumbnail_path, max_length=52, null=True, blank=True)
     slug = models.SlugField(max_length=200, null=True, blank=True)

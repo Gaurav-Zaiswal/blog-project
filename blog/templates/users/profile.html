@@ -3,11 +3,12 @@
 {% block title %}Dashboard {% endblock %}
 
 {% block body %}
-<div class="d-flex flex-row justify-content-between w-full py-2">
+<div class="p-container">
+ <div class="d-flex flex-row justify-content-between w-full py-2">
     <h4 class="text-secondary">Recent Posts</h4>
     <a
-        href="{% url 'posts:new-post' %}"
-        class="btn btn-info" type="button"
+        class="btn btn-info"
+        href="{% url 'posts:new-post' %}" type="button"
     >Create New Post
     </a>
 </div>
@@ -36,8 +37,8 @@
             <td class="activity-post-status">{{ post.status }}</td>
             <td>
                 <a
-                        href="{% url 'posts:update-post' year=post.created_on|date:'Y' month=post.created_on|date:'m' day=post.created_on|date:'d' slug=post.slug %}"
-                        class="btn btn-info" type="button"
+                        class="btn btn-info"
+                        href="{% url 'posts:update-post' year=post.created_on|date:'Y' month=post.created_on|date:'m' day=post.created_on|date:'d' slug=post.slug %}" type="button"
                     >
                     <i class="fas fa-edit cursor-pointer"></i>
                 </a>
@@ -48,6 +49,52 @@
         </tbody>
     </table>
 </div>
+    <div class="d-flex justify-between py-4">
+        <div class="review-box flex-grow-1 lg:ml-12">
+            <div class="w-full">
+                <div class="d-inline-flex mb-2">
+                    <h5 class="text-secondary">Your Latest Reviews</h5>
+                    <a class="btn btn-info btn-sm ml-2"
+                        href="{% url 'movies:add_review' %}" type="button"
+                        >Write a new review
+                    </a>
+                </div>
+
+                <table class="table table-bordered table-hover">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="w-3/4">Review Title</th>
+                            <th scope="col-1">Last Updated</th>
+                            <th scope="col-1">Status</th>
+                            <th>Edit/Remove</th>
+                        </tr>
+                        </thead>
+                </table>
+            </div>
+        </div>
+
+        <div class="movie-box ml-4">
+            <div class=" w-full">
+                <div class="mb-2">
+                    <h4 class="text-secondary">Movies you've added</h4>
+                    <a class="btn btn-info btn-sm"
+                        href="{% url 'movies:add_movie' %}" type="button"
+                        >Add new movie
+                    </a>
+                </div>
+                <table class="table table-bordered table-hover">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="w-3/4">Movie</th>
+                            <th>Edit/Remove</th>
+                        </tr>
+                        </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     // script to show post status as Published or Private, if status === 1 => published, else => private
     const tableDesc = document.getElementsByClassName("activity-post-status");

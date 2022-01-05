@@ -19,7 +19,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'agv=$d+=6^b%y#t9*yq@e$4*z3!aum
 INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'posts.apps.PostsConfig',
-    # 'movies.apps.PostsConfig',
+    'movies',
 
     # defaults
     'django.contrib.admin',
@@ -112,7 +112,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 AUTH_USER_MODEL = 'users.User'
 
 # login-logout redirects
-# LOGIN_REDIRECT_URL = '/users/profile'
+LOGIN_REDIRECT_URL = 'users:profile'
 LOGOUT_REDIRECT_URL = '/'
 
 
@@ -124,3 +124,11 @@ SITE_ID = 1
 # util_location = os.path.join(BASE_DIR, 'blog/')
 CKEDITOR_FILENAME_GENERATOR = 'utils.get_filename'
 CKEDITOR_UPLOAD_PATH = "uploads/"
+
+# email setup
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'emailnaichhaina@gmail.com'
+EMAIL_HOST_PASSWORD = 'emailchachacha'

@@ -16,8 +16,11 @@ sitemaps = {
 
 urlpatterns = [
     path('', include('posts.urls', namespace='posts')),
+    path('movies/', include('movies.urls', namespace='movies')),
     path('site/admin/', admin.site.urls),
     path('author/', include('users.urls', namespace='users-redirect')),
+    path('author/ms/', include('movies.urls', namespace='movies')),
+
     path('login/', auth_views.LoginView.as_view(
         template_name='users/login.html',
         extra_context={
@@ -35,6 +38,11 @@ urlpatterns = [
     path('pages/', include('django.contrib.flatpages.urls')),
     path('terms/', flat_views.flatpage, {'url': '/terms/'}, name='terms'),
     path('privacy/', flat_views.flatpage, {'url': '/privacy/'}, name='privacy'),
+
+    path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
+    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
 ]
 
 # media file configuration for debug mode
