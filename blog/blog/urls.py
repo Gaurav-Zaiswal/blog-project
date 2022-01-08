@@ -17,12 +17,12 @@ sitemaps = {
 }
 
 urlpatterns = [
+    path('site/admin/', admin.site.urls),
     path('', include('posts.urls', namespace='posts')),
     # path('search/', search_movies),
     path('movies/', include('movies.urls', namespace='movies')),
-    path('site/admin/', admin.site.urls),
-    path('author/', include('users.urls', namespace='users-redirect')),
-    path('author/ms/', include('movies.urls', namespace='movies')),
+    path('author/', include('users.urls', namespace='users')),
+    # path('author/ms/', include('movies.urls', namespace='movies')),
 
     path('login/', auth_views.LoginView.as_view(
         template_name='users/login.html',

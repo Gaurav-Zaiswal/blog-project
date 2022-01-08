@@ -1,0 +1,27 @@
+{% extends 'main_dashboard.html' %}
+
+{% block title %}New new Category{% endblock %}
+
+{% block body %}
+
+<div>
+    {% if form %}
+    <form method="POST">
+        {% csrf_token %}
+        <section class="form-group">
+            <label for="category">Category Name</label>
+            {{ form.name }}
+            <!-- <input type="text" class="form-control" name="imdb-id" id="imdb-id" placeholder="tt345fr654u"> -->
+        </section>
+        <button type="submit" class="btn btn-primary w-100">Save</button>
+    </form>
+    {% endif %}
+</div>
+
+<script>
+    // const ReviewField = document.querySelector("#id_review");
+    const CategoryName = document.querySelector("#id_name");
+
+    CategoryName.classList.add("form-control");
+</script>
+{% endblock %}

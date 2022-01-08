@@ -1,16 +1,59 @@
 {% extends 'main_dashboard.html' %}
 
-{% block title %}Create Post{% endblock %}
+{% block title %}New new review{% endblock %}
 
 {% block body %}
-<h4 class="text-center mb-4 py-2 text-info">Create a New Post</h4>
-<div class="card px-3 py-4">
-  <form enctype="multipart/form-data" method="POST">
-    {% csrf_token %}
-    {{ form.media }}
-    {{ form.as_p }}
-    <button class='btn btn-info px-4' type="submit">Post</button>
-</form>
+
+<div>
+    {% if form %}
+    <form>
+        {% csrf_token %}
+        {{ form.media }}
+        <section class="form-group">
+            <label for="category">Category</label>
+            {{ form.category }}
+            <!-- <input type="text" class="form-control" name="imdb-id" id="imdb-id" placeholder="tt345fr654u"> -->
+        </section>
+        <section class="form-group">
+            <label for="title">Title</label>
+            {{ form.title }}
+            <!-- <input type="text" class="form-control" name="imdb-id" id="imdb-id" placeholder="Inception"> -->
+        </section>
+        <section class="form-group">
+            <label for="poster">Poster</label>
+            {{ form.thumbnail_img }}
+            <!-- <input type="image" class="form-control"> -->
+        </section>
+        <section class="form-group">
+            <label for="content">Content</label> <br>
+            {{ form.content }}
+            <!-- <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea> -->
+            <!-- <input type="text" class="form-control" name="Review" id=""> -->
+        </section>
+        <section class="form-group">
+            <label for="status">Status</label>
+            {{ form.status }}
+            <!-- <input type="radio" class="form-control" name="" id=""> -->
+        </section>
+
+        <button type="submit" class="btn btn-primary w-100">Save</button>
+    </form>
+    {% endif %}
 </div>
 
+<script>
+    // const ReviewField = document.querySelector("#id_review");
+    const Category = document.querySelector("#id_category");
+    const Title = document.querySelector("#id_title");
+    const Poster = document.querySelector("#id_thumbnail_img");
+    const Content = document.querySelector("#id_content");
+    const Status = document.querySelector("#id_status");
+
+    Category.classList.add("form-control");
+    Title.classList.add("form-control");
+    Poster.classList.add("form-control");
+    Content.classList.add("form-control");
+    Status.classList.add("form-control");
+    console.log(Category)
+</script>
 {% endblock %}

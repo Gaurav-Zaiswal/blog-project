@@ -16,7 +16,7 @@ from django.db.models import Q
 from django.http import HttpResponseRedirect
 
 from .models import Post, Category
-from .forms import PostForm
+from .forms import CategoryForm, PostForm
 from users.models import Profile
 
 
@@ -65,6 +65,20 @@ class HomeView(ListView):
         context['most_popular_posts_list'] = Post.objects.filter(status=1).order_by('view_count')[:6]
         context['recent_except_three'] = Post.objects.filter(status=1).order_by('-created_on')[3:10]
         return context
+
+@method_decorator(login_required(login_url='/login'), name='dispatch')
+class CreateCategoryView(SuccessMessageMixin, CreateView):
+    model= Category
+    form_class = CategoryForm
+    template_name = 'posts/add_category.html'
+    success_url = reverse_lazy('users:profile')
+    success_message = 'Category has been added successfully'
+
+    def form_valid(self, form):
+        self.obj = form.save(commit=False)
+        self.obj.creator = self.request.user
+        form.save()
+        return super().form_valid(form)
 
 @method_decorator(login_required(login_url='/login'), name='dispatch')
 class CreatePostView(SuccessMessageMixin, CreateView):
