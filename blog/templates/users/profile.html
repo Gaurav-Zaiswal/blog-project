@@ -8,7 +8,7 @@
     <h4 class="text-secondary">Recent Posts</h4>
     <a
         class="btn btn-info"
-        href="{% url 'posts:new-post' %}" type="button"
+        href="#" type="button"
     >Create New Post
     </a>
 </div>
@@ -52,9 +52,9 @@
     <div class="d-flex justify-between py-4">
         <div class="review-box flex-grow-1 lg:ml-12">
             <div class="w-full">
-                <div class="d-inline-flex mb-2">
+                <div class="d-flex flex-row justify-content-between w-full py-2">
                     <h5 class="text-secondary">Your Latest Reviews</h5>
-                    <a class="btn btn-info btn-sm ml-2"
+                    <a class="btn btn-info "
                         href="{% url 'movies:add_review' %}" type="button"
                         >Write a new review
                     </a>
@@ -66,26 +66,6 @@
                             <th scope="w-3/4">Review Title</th>
                             <th scope="col-1">Last Updated</th>
                             <th scope="col-1">Status</th>
-                            <th>Edit/Remove</th>
-                        </tr>
-                        </thead>
-                </table>
-            </div>
-        </div>
-
-        <div class="movie-box ml-4">
-            <div class=" w-full">
-                <div class="mb-2">
-                    <h4 class="text-secondary">Movies you've added</h4>
-                    <a class="btn btn-info btn-sm"
-                        href="{% url 'movies:add_movie' %}" type="button"
-                        >Add new movie
-                    </a>
-                </div>
-                <table class="table table-bordered table-hover">
-                    <thead class="thead-light">
-                        <tr>
-                            <th scope="w-3/4">Movie</th>
                             <th>Edit/Remove</th>
                         </tr>
                         </thead>

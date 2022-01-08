@@ -140,7 +140,7 @@
                     </li>
                     <li class="mr-6 transform hover:scale-110 duration-700">
                         <a class="text-gray-800 font-semibold hover:text-indigo-600 focus:outline-none"
-                            href="{% url 'movies:movie-list' %}">Reviews</a>
+                            href="#">Reviews</a>
                     </li>
                     <li class="mr-6 transform hover:scale-110 duration-700">
                         <a class="text-gray-800 font-semibold hover:text-indigo-600 focus:outline-none"
@@ -359,13 +359,13 @@
                     fetch(url)
                         .then(response => response.json())
                         .then(data => {
-                            // console.log(data)
+                            console.log(data.data)
                             resolve(data.data)
                         })
                 })
             },
             onSubmit: result => {
-                window.open(`/results/address=${result}`);
+                window.open(`/movies/${result}`);
             }
         })
     </script>

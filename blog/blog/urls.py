@@ -9,7 +9,7 @@ from django.contrib.flatpages import views as flat_views
 from django.contrib.sitemaps.views import sitemap
 from posts.sitemaps import PostSitemap, FlatSitemap
 
-from movies.views import search_movies
+# from movies.views import search_movies
 
 sitemaps = {
     'posts': PostSitemap,
@@ -18,7 +18,7 @@ sitemaps = {
 
 urlpatterns = [
     path('', include('posts.urls', namespace='posts')),
-    path('search/', search_movies),
+    # path('search/', search_movies),
     path('movies/', include('movies.urls', namespace='movies')),
     path('site/admin/', admin.site.urls),
     path('author/', include('users.urls', namespace='users-redirect')),
@@ -30,7 +30,8 @@ urlpatterns = [
             'next': '/author/redirect-to-profile/'
         }
     ), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
+    path('logout/', auth_views.LogoutView.as_view(
+        template_name='users/logout.html'), name='logout'),
 
     # url for ckeditor
     path('ckeditor/', include('ckeditor_uploader.urls')),

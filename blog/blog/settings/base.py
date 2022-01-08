@@ -112,8 +112,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 AUTH_USER_MODEL = 'users.User'
 
 # login-logout redirects
-LOGIN_REDIRECT_URL = 'users:profile'
-LOGOUT_REDIRECT_URL = '/'
+# LOGIN_REDIRECT_URL = 'users:profile'
+LOGIN_REDIRECT_URL = 'users:redirect-to-profile'
+LOGOUT_REDIRECT_URL = '/login'
 
 
 # flatapps(for aboutus, privacy ect) configurations

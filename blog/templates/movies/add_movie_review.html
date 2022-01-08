@@ -4,17 +4,70 @@
 
 {% block body %}
 
-{% if form %}
-<form method="post">
-    {% csrf_token %}
-    {{ form.media }}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-success">Save</button> 
-</form>
-{% endif %}
+<div>
+    {% if form %}
+    <form>
+        {% csrf_token %}
+        {{ form.media }}
+        <section class="form-group">
+            <label for="imdb-id">Imdb Id</label>
+            {{ form.imdb_id }}
+            <!-- <input type="text" class="form-control" name="imdb-id" id="imdb-id" placeholder="tt345fr654u"> -->
+        </section>
+        <section class="form-group">
+            <label for="imdb-name">Movie Name</label>
+            {{ form.movie_name }}
+            <!-- <input type="text" class="form-control" name="imdb-id" id="imdb-id" placeholder="Inception"> -->
+        </section>
+        <section class="form-group">
+            <label for="imdb-id">Slug</label>
+            {{ form.slug }}
+            <!-- <input type="text" class="form-control" name="imdb-id" id="imdb-id" placeholder="Inception"> -->
+        </section>
+        <section class="form-group">
+            <label for="imdb-id">Poster</label>
+            {{ form.poster }}
+            <!-- <input type="image" class="form-control"> -->
+        </section>
+        <section class="form-group">
+            <label for="imdb-id">Cover Image</label>
+            {{ form.cover_poster }}
+            <!-- <input type="image" class="form-control"> -->
+        </section>
+        <section class="form-group">
+            <label for="imdb-id">Review</label> <br>
+            {{ form.review }}
+            <!-- <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea> -->
+            <!-- <input type="text" class="form-control" name="Review" id=""> -->
+        </section>
+        <section class="form-group">
+            <label for="imdb-id">Status</label>
+            {{ form.status }}
+            <!-- <input type="radio" class="form-control" name="" id=""> -->
+        </section>
+
+        <button type="submit" class="btn btn-primary w-100">Save</button>
+    </form>
+    {% endif %}
+</div>
 
 <script>
-    const review = document.querySelector("#id_review");
-    review.classList.add('w-50');
+    // const ReviewField = document.querySelector("#id_review");
+    const ImdbId = document.querySelector("#id_imdb_id");
+    const MovieName = document.querySelector("#id_movie_name");
+    const Slug = document.querySelector("#id_slug");
+    const Poster = document.querySelector("#id_poster");
+    const CoverPoster = document.querySelector("#id_cover_poster");
+    const Review = document.querySelector("#id_review");
+    const Status = document.querySelector("#id_status");
+
+    ImdbId.classList.add("form-control");
+    MovieName.classList.add("form-control");
+    Slug.classList.add("form-control");
+    Poster.classList.add("form-control");
+    CoverPoster.classList.add("form-control");
+    Review.classList.add("form-control");
+    Status.classList.add("form-control");
+    // console.log(ReviewField)
 </script>
 {% endblock %}
