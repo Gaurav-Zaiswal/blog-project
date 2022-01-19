@@ -10,6 +10,8 @@
         {{ form.media }}
         {{ form.as_p }}
 
+        {{ form.errors }}
+        {{ form.non_field_errors }}
         <input class="btn btn-success" type="submit" value="Update">
         <button class='btn btn-danger px-4' data-target="#exampleModal" data-toggle="modal" type="button">Delete Post
         </button>

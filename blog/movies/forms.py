@@ -17,7 +17,8 @@ from ckeditor_uploader.widgets import CKEditorUploadingWidget  #, CKEditorWidget
 
 class MovieReviewForm(forms.ModelForm):
     """ form to add review for existing movie """
+    review = forms.CharField(widget=CKEditorUploadingWidget())
 
     class Meta:
         model = MovieRating
-        fields = ['imdb_id', 'movie_name', 'slug', 'poster', 'cover_poster', 'review', 'status' ]
+        fields = ['imdb_id', 'movie_name', 'poster', 'cover_poster', 'review', 'status' ]

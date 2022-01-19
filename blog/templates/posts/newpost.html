@@ -6,9 +6,12 @@
 
 <div>
     {% if form %}
-    <form>
+    <form enctype='multipart/form-data' method="POST">
         {% csrf_token %}
         {{ form.media }}
+
+        {{ form.errors }}
+        {{ form.non_field_errors }}
         <section class="form-group">
             <label for="category">Category</label>
             {{ form.category }}

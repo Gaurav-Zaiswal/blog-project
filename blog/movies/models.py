@@ -31,8 +31,8 @@ def thumbnail_path(instance, filename):
     extension = filename.split('.')[1]
     if len(filename.split('.')) != 2:
         raise TypeError("image seems currupted...")
-    if extension not in ['jpg', 'jpeg', 'JPG', 'JPEG']:
-        raise TypeError("we currently accept jpg/jpeg formats only.")
+    if extension not in ['jpg', 'jpeg', 'JPG', 'JPEG', 'png', 'PNG']:
+        raise TypeError("we currently accept jpg/jpeg png formats only.")
     unique_name = uuid.uuid4().hex
     new_file_name = 'poster/' + today.strftime("%Y") + '/' + \
                     today.strftime("%m") + '/' + unique_name + '.' + extension
@@ -95,9 +95,9 @@ class MovieRating(models.Model):
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)  # foreign key
     imdb_id = models.CharField(max_length=10)
     movie_name = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=70)
-    poster = models.ImageField(upload_to=thumbnail_path, max_length=52) # small size for listing
-    cover_poster = models.ImageField(upload_to=thumbnail_path, max_length=52, null=True, blank=True) # cover poster for review page
+    slug = models.SlugField(max_length=50)
+    poster = models.ImageField(upload_to=thumbnail_path, max_length=100) # small size for listing
+    cover_poster = models.ImageField(upload_to=thumbnail_path, max_length=100, null=True, blank=True) # cover poster for review page
     review = RichTextUploadingField()
     updated_on = models.DateTimeField('Date and Time', auto_now=True)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -105,11 +105,11 @@ class MovieRating(models.Model):
 
     # validating created_on, so that user cannot select past date
     # also known as field level validation
-    def clean_created_on(self):
-        """Make sure expiry time cannot be in the past"""
+    # def clean_created_on(self):
+    #     """Make sure expiry time cannot be in the past"""
 
-        if self.created_on and self.created_on < now:
-            raise ValidationError('Please, pick present date and time...')
+    #     if self.created_on and self.created_on < now:
+    #         raise ValidationError('Please, pick present date and time...')
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.movie_name)

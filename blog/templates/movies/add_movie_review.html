@@ -1,14 +1,18 @@
 {% extends 'main_dashboard.html' %}
 
-{% block title %}New new review{% endblock %}
+{% block title %}New123review{% endblock %}
 
 {% block body %}
 
 <div>
     {% if form %}
-    <form>
+    <form enctype='multipart/form-data' method="POST">
         {% csrf_token %}
         {{ form.media }}
+
+        {{ form.errors }}
+        {{ form.non_field_errors }}
+
         <section class="form-group">
             <label for="imdb-id">Imdb Id</label>
             {{ form.imdb_id }}
@@ -19,11 +23,11 @@
             {{ form.movie_name }}
             <!-- <input type="text" class="form-control" name="imdb-id" id="imdb-id" placeholder="Inception"> -->
         </section>
-        <section class="form-group">
+        <!-- <section class="form-group">
             <label for="imdb-id">Slug</label>
             {{ form.slug }}
-            <!-- <input type="text" class="form-control" name="imdb-id" id="imdb-id" placeholder="Inception"> -->
-        </section>
+            <input type="text" class="form-control" name="slug" id="slug" placeholder="Inception"> 
+        </section> -->
         <section class="form-group">
             <label for="imdb-id">Poster</label>
             {{ form.poster }}

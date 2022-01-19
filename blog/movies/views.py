@@ -1,9 +1,10 @@
 import datetime
 import json
 from django.core import serializers
+from django.core.exceptions import ValidationError
 from django.forms.models import model_to_dict
 from django.http.response import JsonResponse
-
+from django.shortcuts import render
 from django.utils import timezone
 from django.utils.timezone import make_aware
 from django.views import View
@@ -16,7 +17,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.utils.translation import gettext as _
 from django.urls import reverse_lazy
-from django.db.models import Q
+from django.db.models import Q, fields
 from django.http import HttpResponseRedirect
 
 from .models import MovieRating
@@ -43,7 +44,9 @@ from .forms import MovieReviewForm
 
 @method_decorator(login_required(login_url='/login'), name='dispatch')
 class CreateMovieReviewView(SuccessMessageMixin, CreateView):
+    # print("inside view")
     model = MovieRating
+    # fields = ['imdb_id', 'movie_name', 'poster', 'cover_poster', 'review', 'status']
     form_class = MovieReviewForm
     template_name = 'movies/add_movie_review.html'
     success_url = reverse_lazy('users:profile')
@@ -51,12 +54,14 @@ class CreateMovieReviewView(SuccessMessageMixin, CreateView):
 
     def form_valid(self, form):
         self.obj = form.save(commit=False)
+        print('after commit')
         self.obj.author = self.request.user
         form.save()
         return super().form_valid(form)
 
 
 # @method_decorator(login_required(login_url='/login'), name='dispatch')
+
 # class GetMoviesList(ListView):
 #     model = Movie
 #     template_name = "movies/movie_review.html"

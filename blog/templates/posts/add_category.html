@@ -8,6 +8,9 @@
     {% if form %}
     <form method="POST">
         {% csrf_token %}
+
+        {{ form.errors }}
+        {{ form.non_field_errors }}
         <section class="form-group">
             <label for="category">Category Name</label>
             {{ form.name }}
