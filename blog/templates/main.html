@@ -378,8 +378,9 @@
                 const parsedResult = JSON.parse(result.toString())
                 console.log(parsedResult);
                 return `<li ${props}>
-                            <div class="wiki-title">
-                                ${parsedResult.movie_name}
+                            <div class="movie-name">
+                                <div>${parsedResult.movie_name}</div>
+                                <span class="text-xs">[${parsedResult.release_date}]</span>
                             </div>
                         </li>`
             },
@@ -397,5 +398,4 @@
         })
     </script>
 </body>
-
 </html>

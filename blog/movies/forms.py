@@ -21,4 +21,4 @@ class MovieReviewForm(forms.ModelForm):
 
     class Meta:
         model = MovieRating
-        fields = ['imdb_id', 'movie_name', 'poster', 'cover_poster', 'review', 'status' ]
+        fields = ['imdb_id', 'movie_name','release_date', 'poster', 'cover_poster', 'review', 'status' ]

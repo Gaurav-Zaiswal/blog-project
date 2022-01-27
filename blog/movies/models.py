@@ -95,6 +95,7 @@ class MovieRating(models.Model):
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)  # foreign key
     imdb_id = models.CharField(max_length=10)
     movie_name = models.CharField(max_length=50)
+    release_date = models.DateField(auto_now_add=False)
     slug = models.SlugField(max_length=50)
     poster = models.ImageField(upload_to=thumbnail_path, max_length=100) # small size for listing
     cover_poster = models.ImageField(upload_to=thumbnail_path, max_length=100, null=True, blank=True) # cover poster for review page

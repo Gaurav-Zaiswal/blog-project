@@ -8,7 +8,6 @@ imdb_ids.forEach(element => {
     .then(
         response => response.json())
     .then( function(data){
-        console.log(data);
         imdbRating[i].innerText = data['imDb'];
         // console.log(imdbRating);
         metaScore[i].innerText = data['metacritic'];

@@ -78,34 +78,16 @@ def get_address(request):
         return JsonResponse({'status': 200, 'data': payload}) 
     return JsonResponse({'status': 500})
 
-# serializer_qs =serializers.serialize('json', query, ensure_ascii=False)
 
 def search_movie(request):
     movie_name = request.GET.get('movie_name')
-    # print(movie_title)
     payload=[]
     if movie_name:
-        qs = MovieRating.objects.filter(movie_name__icontains=movie_name).values('movie_name', 'slug')
+        qs = MovieRating.objects.filter(movie_name__icontains=movie_name).values('movie_name', 'release_date', 'slug')
         for query in qs:
-            q = json.dumps(query)
+            query['release_date'] = query['release_date'].year
+
+            q = json.dumps(query, default=str)
             payload.append(q)
-        # serializer_qs =serializers.serialize('json', qs, ensure_ascii=False)
-        
-        return JsonResponse({'status': 200, 'data': payload}) # data must contain an arrar, here it is payload
+        return JsonResponse({'status': 200, 'data': payload})  
     return JsonResponse({'status': 500})
-
-
-
-
-# qs_json = json.dumps(qs)
-        # length_qs = len(qs)
-        # for i in range(0, length_qs):
-        #     query = qs[i]
-        #     print(query['slug'])
-            # serializer_qs =serializers.serialize('json', query, ensure_ascii=False) 
-            # payload.append(serializer_qs)
-        # for query in qs:
-            # print(movie)
-            # payload.append(movie.movie_name)
-            # serializer_qs =serializers.serialize('json', query, ensure_ascii=False)
-            # payload.append(serializer_qs)

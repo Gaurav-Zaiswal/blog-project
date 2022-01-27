@@ -23,11 +23,13 @@
             {{ form.movie_name }}
             <!-- <input type="text" class="form-control" name="imdb-id" id="imdb-id" placeholder="Inception"> -->
         </section>
-        <!-- <section class="form-group">
-            <label for="imdb-id">Slug</label>
-            {{ form.slug }}
-            <input type="text" class="form-control" name="slug" id="slug" placeholder="Inception"> 
-        </section> -->
+        <section class="form-group">
+            <label for="release Date">Release Date</label>
+            <!-- <div class="input-group date" data-target-input="nearest" id="datetimepicker1">
+                {{ form.release_date }}
+            </div> -->
+            <input type="date" class="form-control" name="release_date" id="release_date" placeholder="Release Date"> 
+        </section>
         <section class="form-group">
             <label for="imdb-id">Poster</label>
             {{ form.poster }}
@@ -56,6 +58,14 @@
 </div>
 
 <script>
+
+    $(function () {
+        $("#datetimepicker1").datetimepicker({
+            format: 'DD/MM/YYYY',
+        });
+    });
+
+
     // const ReviewField = document.querySelector("#id_review");
     const ImdbId = document.querySelector("#id_imdb_id");
     const MovieName = document.querySelector("#id_movie_name");
