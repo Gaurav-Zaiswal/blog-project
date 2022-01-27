@@ -1,7 +1,7 @@
 
 from django.urls import path
 # from django.views.generic.dates import DateDetailView
-from .views import CreateMovieReviewView, GetMovieReviewDetail, GetMovieReviewList
+from .views import CreateMovieReviewView, GetDetailedMovieReview, GetMovieReviewList
 # from .models import Post
 
 app_name = 'movies'
@@ -12,5 +12,5 @@ urlpatterns = [
     
     path('new/', CreateMovieReviewView.as_view(), name='add_review'),
     path('review/', GetMovieReviewList.as_view(), name='movie-list'),
-    # path('<slug:slug>/', GetMovieReview.as_view(), name='moview-review-detail')
+    path('<slug:slug>/', GetDetailedMovieReview.as_view(), name='moview-review-detail')
 ]

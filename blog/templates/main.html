@@ -17,7 +17,7 @@
 
     <!-- autocomplete css cdn -->
     <link rel="stylesheet" href="https://unpkg.com/@trevoreyre/autocomplete-js/dist/style.css" />
-
+    
     <title>{% block title %}Landing Page{% endblock %}</title>
     {% block main-header %}
     {% endblock %}
@@ -194,9 +194,8 @@
                             placeholder="Start typing... e.g. 61750 Barajas Junctions Apt. 603 South Tammy, AK 48800"
                             aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button> -->
-        
-                        <input class="autocomplete-input"
-                            placeholder="Search Movie" />
+
+                        <input class="autocomplete-input" placeholder="Search Movie" />
                         <ul class="autocomplete-result-list"></ul>
                     </div>
                 </div>
@@ -295,15 +294,18 @@
                                 <h1 class="footer-header inline relative text-xl pb-1 text-gray-800">Quick Links</h1>
                                 <ul class="mt-4 mb-10 font-thin text-gray-600 leading-loose">
                                     <li class="cursor-pointer text-gray-700 hover:text-gray-800 duration-200">Home</li>
-                                    <li class="cursor-pointer text-gray-700 hover:text-gray-800 duration-200">Contact us</li>
+                                    <li class="cursor-pointer text-gray-700 hover:text-gray-800 duration-200">Contact us
+                                    </li>
                                 </ul>
                             </div>
                             <div>
                                 <h1 class="footer-header inline relative text-xl pb-1 text-gray-800">Important</h1>
                                 <ul class="mt-4 mb-10 font-thin text-gray-600 leading-loose">
-                                    <li class="cursor-pointer text-gray-700 hover:text-gray-800 duration-200">Privacy &amp; Cookies
+                                    <li class="cursor-pointer text-gray-700 hover:text-gray-800 duration-200">Privacy
+                                        &amp; Cookies
                                     </li>
-                                    <li class="cursor-pointer text-gray-700 hover:text-gray-800 duration-200">Terms &amp; Conditions
+                                    <li class="cursor-pointer text-gray-700 hover:text-gray-800 duration-200">Terms
+                                        &amp; Conditions
                                     </li>
                                 </ul>
                             </div>
@@ -314,8 +316,10 @@
                         <h1 class="footer-header inline relative text-xl pb-1 text-gray-800">Site Map</h1>
                         <ul class="mt-4 mb-10 font-thin text-gray-600 leading-loose">
                             <li class="cursor-pointer text-gray-700 hover:text-gray-800 duration-200">Today's Hot</li>
-                            <li class="cursor-pointer text-gray-700 hover:text-gray-800 duration-200">Latest Release</li>
-                            <li class="cursor-pointer text-gray-700 hover:text-gray-800 duration-200">Upcoming Movies</li>
+                            <li class="cursor-pointer text-gray-700 hover:text-gray-800 duration-200">Latest Release
+                            </li>
+                            <li class="cursor-pointer text-gray-700 hover:text-gray-800 duration-200">Upcoming Movies
+                            </li>
                             <li class="cursor-pointer text-gray-700 hover:text-gray-800 duration-200">Box office</li>
                             <li class="cursor-pointer text-gray-700 hover:text-gray-800 duration-200">Box office</li>
                             <li class="cursor-pointer text-gray-700 hover:text-gray-800 duration-200">TOP 10</li>
@@ -353,19 +357,42 @@
         new Autocomplete('#autocomplete', {
             search: input => {
                 // console.log(input)
-                const url = `/search/?movie_title=${input}`
+                const url = `/search/?movie_name=${input}`
                 // call the url and render the json
                 return new Promise(resolve => {
                     fetch(url)
                         .then(response => response.json())
                         .then(data => {
-                            console.log(data.data)
+                            // const results = data.data.map((result, index) => {
+                            //     const parsedResult = JSON.parse(result.toString())
+                            //     return { ...parsedResult, index }
+                            // })
+                            // console.log(results)
                             resolve(data.data)
                         })
                 })
             },
+
+
+            renderResult: (result, props) => {
+                const parsedResult = JSON.parse(result.toString())
+                console.log(parsedResult);
+                return `<li ${props}>
+                            <div class="wiki-title">
+                                ${parsedResult.movie_name}
+                            </div>
+                        </li>`
+            },
+
+            getResultValue: result => {
+                const parsedResult = JSON.parse(result.toString());
+                return parsedResult.movie_name
+            },
             onSubmit: result => {
-                window.open(`/movies/${result}`);
+                console.log(result);
+                const parsedResult = JSON.parse(result.toString());
+                // console.log(parsedResult)
+                window.open(`/movies/${parsedResult.slug}`);
             }
         })
     </script>

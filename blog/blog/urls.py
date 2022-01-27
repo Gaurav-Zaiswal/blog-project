@@ -9,7 +9,7 @@ from django.contrib.flatpages import views as flat_views
 from django.contrib.sitemaps.views import sitemap
 from posts.sitemaps import PostSitemap, FlatSitemap
 
-# from movies.views import search_movies
+from movies.views import search_movie
 
 sitemaps = {
     'posts': PostSitemap,
@@ -19,7 +19,7 @@ sitemaps = {
 urlpatterns = [
     path('site/admin/', admin.site.urls),
     path('', include('posts.urls', namespace='posts')),
-    # path('search/', search_movies),
+    path('search/', search_movie),
     path('movies/', include('movies.urls', namespace='movies')),
     path('author/', include('users.urls', namespace='users')),
     # path('author/ms/', include('movies.urls', namespace='movies')),

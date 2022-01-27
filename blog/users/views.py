@@ -13,6 +13,7 @@ from .forms import CustomProfileChangeForm, CustomUserChangeForm, CustomUserCrea
 from .models import User, Profile
 from posts.views import HomeView
 from posts.models import Post
+from movies.models import MovieRating
 
 
 @login_required
@@ -42,8 +43,10 @@ class ProfileView(ListView):
         context['author_all_posts_list'] = Post.objects.filter(author=self.request.user.id).order_by('-created_on')
         context['author_draft_posts_list'] = Post.objects.filter(
             Q(author=self.request.user.id) & Q(status=0)).order_by('-created_on')
+        context['movie_review_list'] = MovieRating.objects.filter(
+            author=self.request.user.id
+        ).order_by('-created_on')
         return context
-
 
 @method_decorator(login_required(login_url='/login'), name='dispatch')
 class UserUpdateView(SuccessMessageMixin, UpdateView):

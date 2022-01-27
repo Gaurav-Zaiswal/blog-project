@@ -125,15 +125,15 @@
                 <!-- container -->
                 <div class="img-container p-0 border-0 bg-dark text-white">
                     <!-- img box -->
-                    <img alt="..." class="card-img"
-                        src="/media/uploads/2020/10/30/87e58bde68ba4c7180673dc34f555d7d.jpeg">
+                    <!-- <img alt="..." class="card-img" src="/media/uploads/2020/10/30/87e58bde68ba4c7180673dc34f555d7d.jpeg"> -->
+                    <img alt="..." class="card-img" src="{{ movie.poster.url }}">
                     <div class="card-overlay-content">
                         <!-- overlay content -->
                         <div class="card-text-wrapper">
                             <h5 id="movie-title" class="card-title text-white fs-1">{{ movie.title | capfirst }}</h5>
 
-                            <span class="card-text">IMDB:</span> <span id="imdb-star" class="imdb-star">3.8</span> <br>
-                            <span class="card-text">Metacritic:</span> <span id="meta-score" class= "meta-score">6</span>
+                            <span class="card-text">IMDB:</span> <span id="imdb-star" class="imdb-star">N/A</span> <br>
+                            <span class="card-text">Metacritic:</span> <span id="meta-score" class= "meta-score">N/A</span>
                         </div>
 
                     </div>
