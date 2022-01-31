@@ -1,5 +1,5 @@
 {% extends 'main.html' %}
-
+{% load thumbnail %}
 
 {% block og_meta %}
 
@@ -49,38 +49,30 @@
                             </span>
                         </a>
                     </div>
+                    <div>
+                        <p class="font-bold tracking-wide md:text-3xl">{{ detailed_post.title | safe | title }}</p>
+                        <!-- <span><i class="far fa fa-calendar opacity-75"></i></span> -->
+                        <span class="text-xs opacity-75 md:inline-block md:text-sm">
+                            {{ detailed_post.created_on| date:"F d, Y" }}</span>
 
-                    <p class="font-bold tracking-wide pb-3 md:text-3xl md:py-6">{{ detailed_post.title | safe }}</p>
+                    </div>
 
                     <!--                    social media share buttons-->
 
                     <div class="social-media-section flex md:my-6">
-                        <div class="fb-share-button"
+                        <div class="rounded" title="Twitter">
+                            <a class="twitter-button" data-dnt="true" data-show-count="false" data-size="large"
+                                href="https://twitter.com/intent/tweet?button_hashtag=button&ref_src=twsrc%5Etfw">
+                                <i class="fab fa-twitter text-2xl text-blue-500 hover:text-gray-800 duration-500"></i>
+                            </a>
+                        </div>
+                        <div class="mx-2 fb-share-button"
                             data-href="http://127.0.0.1:8000/post/2020/10/30/new-blog-with-django-ckdeitor/"
                             data-layout="button" data-size="small">
                             <a class="fb-xfbml-parse-ignore"
                                 href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A8000%2Fpost%2F2020%2F10%2F30%2Fnew-blog-with-django-ckdeitor%2F&amp;src=sdkpreparse"
                                 target="_blank">
                                 Share</a>
-                        </div>
-                        <div class="mr-1 rounded" title="Twitter">
-                            <a class="twitter-button" data-dnt="true" data-show-count="false" data-size="large"
-                                href="https://twitter.com/intent/tweet?button_hashtag=button&ref_src=twsrc%5Etfw">
-                                <i class="fab fa-twitter text-2xl text-blue-500 hover:text-gray-800 duration-500"></i>
-                            </a>
-                        </div>
-                        <div class="mr-1 rounded" title="YouTube">
-                            <a class="focus:outline-none" href="http://youtube.com" rel="noopener noreferrer nofollowed"
-                                target="_blank">
-                                <i class="fab fa-whatsapp text-2xl text-green-600 hover:text-gray-800 duration-500"></i>
-                            </a>
-                        </div>
-                        <div class="mr-1 rounded" title="YouTube">
-                            <a class="focus:outline-none" href="http://youtube.com" rel="noopener noreferrer nofollowed"
-                                target="_blank">
-                                <i
-                                    class="fab fa-facebook-messenger text-2xl text-blue-600 hover:text-gray-800 duration-500"></i>
-                            </a>
                         </div>
                     </div>
 
@@ -93,25 +85,13 @@
                     {% endif %}
                     <div class="detailed-post-body py-6 border-b md:py-8">
 
-                        <div
-                            class="detail-post-date-author font-medium font-body mb-4 border-l-2 border-red-700 px-3 md:border-l-4 md:py-2 md:my-6">
+                        <!-- <div class="detail-post-date-author font-medium font-body mb-4 border-l-2 border-red-700 px-3 md:border-l-4 md:py-2 md:my-6"> -->
                             <!--                            <div class="detail-post-avatar inline-block w-10">-->
                             <!--                                <img alt="author avatar" class="rounded-full w-full"-->
                             <!--                                     src="{{ detailed_post.author.profile.image.url }}">-->
                             <!--                            </div> -->
 
-
-                            <div>
-                                <span><i class="fa fa-user-o opacity-75"></i></span>
-                                <span
-                                    class="text-xs capitalize translate-x-2 mr-2 opacity-75 md:text-sm md:font-normal">
-                                    {{ detailed_post.author.first_name }} {{ detailed_post.author.last_name }}</span>
-                                <span><i class="far fa fa-calendar opacity-75"></i></span>
-                                <span class="text-xs opacity-75 md:inline-block md:text-sm">{{ detailed_post.created_on
-                                    | date:"F d, Y" }}</span>
-
-                            </div>
-                        </div>
+                        <!-- </div> -->
 
 
                         <div class="leading-loose tracking-wider font-priBody opacity-75 md:text-base">
@@ -120,18 +100,21 @@
 
                         <!-- authors /post details starts -->
                         <div class="my-6 py-4 border-t-2 border-b-2">
-                            <div class="author">
-                                
-                                <span class="text-lg font-medium leading-none">Gaurav Jaiswal</span> <br>
-                                <span class="text-xs leading-none">CEO at ABC.com and student at NCIT</span>
+                            <div class="flex">
+                                <div  class="author-avatar w-10">
+                                    <img src="{{ detailed_post.author.profile.image.url  }}" alt="author"
+                                        class="rounded-full"
+                                    >
+                                </div>
+                                <div class="author-bio mx-4 my-0">
+                                    <p class="text-lg font-medium leading-none">{{ detailed_post.author.first_name }} 
+                                        {{ detailed_post.author.last_name }}</p>
+                                    <span class="text-xs leading-none">CEO at ABC.com and student at NCIT</span>
+                                </div>
                             </div>
                         </div>
                         <!-- authors /post details ends -->
-                        <div></div>
                         <p>comments here:-</p>
-                        <div class="fb-comments" data-href="127.0.0.1:8000" data-numposts="10" data-width="100%">
-
-                        </div>
                     </div>
                 </div>
             </section>
