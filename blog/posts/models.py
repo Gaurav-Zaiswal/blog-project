@@ -13,6 +13,7 @@ from users.models import Profile
 # from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 
+
 STATUS = (
     (0, "Draft"),
     (1, "Publish")
@@ -92,20 +93,25 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
+        """ we can return hardcoded urls, but to make it dynamic
+            we will use reverse(); it takes url name and returns its path
+        """
         if self.created_on.day in range(0, 10):
             self.created_on.day = "0" + str(self.created_on.day)  # 9 will be 09, as url req 2 digits
 
         if self.created_on.month in range(0, 10):
             self.created_month = "0" + str(self.created_on.month)
 
-        return reverse('posts:detail-post',
-                       kwargs={
-                           'year': str(self.created_on.year),
-                           'month': self.created_on.month if type(self.created_on.day) == str else str(self.created_month),
-                           'day': self.created_on.day if type(self.created_on.day) == str else str(self.created_on.day),
-                           'slug': self.slug,
-                       }
-                       )
+        return reverse(
+            'posts:detail-post',
+            kwargs={
+                'year': str(self.created_on.year),
+                'month': self.created_on.month if type(self.created_on.day) == str else str(self.created_month),
+                'day': self.created_on.day if type(self.created_on.day) == str else str(self.created_on.day),
+                'slug': self.slug,
+            }
+        )  # https://docs.djangoproject.com/en/4.0/topics/http/urls/#id5
+        # return "/youtube.com"
 
     # def get_absolute_url(self):
     #     return "/"

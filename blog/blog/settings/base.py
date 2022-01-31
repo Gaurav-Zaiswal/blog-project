@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'django_countries',
     'tempus_dominus',
+    'sorl.thumbnail',
     # sitemaps
     'django.contrib.sitemaps',
 ]

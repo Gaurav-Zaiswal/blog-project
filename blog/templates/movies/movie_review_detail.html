@@ -8,7 +8,7 @@
 </head>
 <body>
     {% if movie_review_details %}
-        {{ movie_review_details.review }}
+        {{ movie_review_details.review | safe}}
     {% endif %}
 </body>
 </html>

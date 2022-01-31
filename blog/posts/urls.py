@@ -8,6 +8,7 @@ from .views import CreateCategoryView, HomeView, CreatePostView, DetailPostView,
     TrendingNewsView, ReviewListView
 # from .models import Post
 
+
 app_name = 'posts'
 urlpatterns = [
     path('', HomeView.as_view(), name='landingpage'),

@@ -32,6 +32,7 @@
 </head>
 
 <body>
+
     <div class="parent-container md:grid grid-cols-8">
         {% block primary-nav %}
         <header class="col-start-2 col-end-8">
@@ -142,10 +143,10 @@
                         <a class="text-gray-800 font-semibold hover:text-indigo-600 focus:outline-none"
                             href="{% url 'movies:movie-list' %}">Reviews</a>
                     </li>
-                    <li class="mr-6 transform hover:scale-110 duration-700">
+                    <!-- <li class="mr-6 transform hover:scale-110 duration-700">
                         <a class="text-gray-800 font-semibold hover:text-indigo-600 focus:outline-none"
                             href="{% url 'posts:category-search' 'gossip' %}">Gossip</a>
-                    </li>
+                    </li> -->
 
                     <!-- dropdown menu for movies  -->
                     <!--
@@ -267,7 +268,7 @@
             </div>
             <!-- works as overlay when drawer is on-->
             <div class="drawer-overlay fixed top-0 left-0 w-full h-full bg-black opacity-25 z-10"></div>
-
+            
             {% block body %}{% endblock %}
 
             <!-- footer starts old bg color: bg-gray-800-->
