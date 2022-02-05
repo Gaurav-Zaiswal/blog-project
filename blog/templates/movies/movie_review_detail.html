@@ -12,20 +12,22 @@
 
 
         <div class="movie-desc">
-            <div class="flex"> 
-                <p class="font-semibold leading-loose mr-2" style="font-size: 2rem;">Avatar</p>
-                <img src="{% static 'IMDB_Logo_2016.svg' %}" alt="" style="width: 3rem;">
+            <div class="name-year">
+                <div class="flex"> 
+                    <p class="font-semibold mr-2" style="font-size: 2rem;">Avatar</p>
+                    <img src="{% static 'IMDB_Logo_2016.svg' %}" alt="" style="width: 2.5rem;">
+                </div>
+                <div class="mb-4 mt-2">
+                    <p class="text-xl font-medium">2022</p>
+                    <p class="text-md leading-none">Action/Thriller</p>
+                </div>
             </div>
-            <div>
-                <p class="text-xl font-medium">2022</p>
-                <p class="text-md leading-none">Action/Thriller</p>
-            </div>
-            <div class="flex my-8">
+            <div class=" ratings flex">
                 <div class="imdb-star flex">
                     <img 
                     src="{% static 'start.png' %}" 
                     alt="star"
-                    style="width: 2rem;"
+                    style="max-height: 1.5rem;"
                     title="IMDb rating"
                     >
                     <span class="ml-1">8.9</span>
@@ -34,7 +36,7 @@
                     <img 
                     src="{% static 'rotten-tomato.png' %}" 
                     alt="star"
-                    style="width: 2rem;"
+                    style="max-height: 1.5rem;"
                     title="rotten tomato"
                     >
                     <span class="ml-1">8.9</span>
@@ -43,7 +45,7 @@
                     <img 
                     src="{% static 'metacritic-icon.svg' %}" 
                     alt="star"
-                    style="width: 2rem;"
+                    style="max-height: 1.5rem;"
                     title="Metacritic Score"
                     >
                     <span class="ml-1">79</span>
