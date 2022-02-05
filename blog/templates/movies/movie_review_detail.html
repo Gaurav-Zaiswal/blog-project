@@ -13,7 +13,7 @@
 
         <div class="movie-desc">
             <div class="name-year">
-                <div class="flex"> 
+                <div class="flex">
                     <p class="font-semibold mr-2" style="font-size: 2rem;">Avatar</p>
                     <img src="{% static 'IMDB_Logo_2016.svg' %}" alt="" style="width: 2.5rem;">
                 </div>
@@ -24,36 +24,173 @@
             </div>
             <div class=" ratings flex">
                 <div class="imdb-star flex">
-                    <img 
-                    src="{% static 'start.png' %}" 
-                    alt="star"
-                    style="max-height: 1.5rem;"
-                    title="IMDb rating"
-                    >
+                    <img src="{% static 'start.png' %}" alt="star" style="max-height: 1.5rem;" title="IMDb rating">
                     <span class="ml-1">8.9</span>
                 </div>
                 <div class="rotten-tomato flex mx-2">
-                    <img 
-                    src="{% static 'rotten-tomato.png' %}" 
-                    alt="star"
-                    style="max-height: 1.5rem;"
-                    title="rotten tomato"
-                    >
+                    <img src="{% static 'rotten-tomato.png' %}" alt="star" style="max-height: 1.5rem;"
+                        title="rotten tomato">
                     <span class="ml-1">8.9</span>
                 </div>
                 <div class="metacritic-score flex">
-                    <img 
-                    src="{% static 'metacritic-icon.svg' %}" 
-                    alt="star"
-                    style="max-height: 1.5rem;"
-                    title="Metacritic Score"
-                    >
+                    <img src="{% static 'metacritic-icon.svg' %}" alt="star" style="max-height: 1.5rem;"
+                        title="Metacritic Score">
                     <span class="ml-1">79</span>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </section>
-<section class="review"></section>
+<section class="review">
+    <div class="cover-img-container">
+        <img src="https://i.pinimg.com/originals/ad/8e/e3/ad8ee30b82a99878e3cd2c55eeb75375.jpg" alt="" width="full"
+            height="auto">
+    </div>
+
+    <!-- review section starts  -->
+    <div class="main-wrapper px-4 md:px-12 md:py-12">
+        <div class="detailed-container md:flex">
+            <div class="detailed-post-wrapper md:w-2/3">
+                <section class="detailed-post">
+                    <div class="detailed-post-header-wrapper">
+                        <div class="relative category inline-block my-4">
+                            <a href="#">
+                                <span
+                                    class="footer-header cursor-pointer opacity-75 text-xs md:text-sm font-medium hover:text-gray-700">
+                                    action/thriller
+                                </span>
+                            </a>
+                        </div>
+                        <div>
+                            <!-- <p class="font-bold tracking-wide md:text-3xl">{{ detailed_post.title | safe | title }}</p> -->
+                            <!-- <span><i class="far fa fa-calendar opacity-75"></i></span> -->
+                            <span class="text-xs opacity-75 md:inline-block md:text-sm">
+                                2022/08/03</span>
+
+                        </div>
+
+                        <!--                    social media share buttons-->
+
+                        <div class="social-media-section flex md:my-6">
+                            <div class="rounded" title="Twitter">
+                                <a class="twitter-button" data-dnt="true" data-show-count="false" data-size="large"
+                                    href="https://twitter.com/intent/tweet?button_hashtag=button&ref_src=twsrc%5Etfw">
+                                    <i
+                                        class="fab fa-twitter text-2xl text-blue-500 hover:text-gray-800 duration-500"></i>
+                                </a>
+                            </div>
+                            <div class="mx-2 fb-share-button"
+                                data-href="http://127.0.0.1:8000/post/2020/10/30/new-blog-with-django-ckdeitor/"
+                                data-layout="button" data-size="small">
+                                <a class="fb-xfbml-parse-ignore"
+                                    href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A8000%2Fpost%2F2020%2F10%2F30%2Fnew-blog-with-django-ckdeitor%2F&amp;src=sdkpreparse"
+                                    target="_blank">
+                                    Share</a>
+                            </div>
+                        </div>
+
+                        
+
+                        <!-- <div class="detailed-thumbnail-holder my-2 max-w-screen-md">
+                            <img alt="cover image" class="w-full" src="{{ detailed_post.thumbnail_img.url }}">
+                        </div> -->
+
+                        
+                        <div class="detailed-post-body py-6 border-b md:py-8">
+
+                            <!-- <div class="detail-post-date-author font-medium font-body mb-4 border-l-2 border-red-700 px-3 md:border-l-4 md:py-2 md:my-6"> -->
+                            <!--                            <div class="detail-post-avatar inline-block w-10">-->
+                            <!--                                <img alt="author avatar" class="rounded-full w-full"-->
+                            <!--                                     src="{{ detailed_post.author.profile.image.url }}">-->
+                            <!--                            </div> -->
+
+                            <!-- </div> -->
+
+
+                            <div class="leading-loose tracking-wider font-priBody opacity-75 md:text-base">
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aperiam beatae debitis rerum quidem odit dolorem porro hic velit, adipisci itaque officia incidunt libero ullam optio necessitatibus laborum quia sapiente earum quisquam nemo, corporis quasi exercitationem. Eius iusto esse aliquam necessitatibus quasi quis dolorum nesciunt provident aliquid reprehenderit, saepe aperiam hic cum incidunt aspernatur ipsum facere quia molestias similique modi dolorem asperiores enim. Neque minima corporis mollitia maiores ab fugit delectus unde accusantium exercitationem voluptas illum, nam magnam molestiae officiis ipsum quo blanditiis. Cupiditate ad deleniti consequatur qui illum aliquam provident doloribus! Quasi nesciunt tempora illum eveniet. Iste alias facere dicta accusamus laborum placeat consectetur aut fuga rem tempora. Nulla laudantium deleniti, sint eos fuga eveniet repudiandae! Distinctio enim aperiam repudiandae odio laborum natus deleniti! Aliquid modi sint dolorum porro rerum sunt, maxime deserunt, sequi vitae nesciunt eos exercitationem culpa, assumenda repudiandae quod iusto aut consequuntur eveniet non! Consequatur deserunt explicabo adipisci autem, totam vel et consectetur, perspiciatis laudantium ut vero nemo quis voluptate. Velit similique voluptate incidunt. Tempore rem consectetur exercitationem modi, quas, ut nesciunt enim maiores error officiis molestias sunt aspernatur? Iure, obcaecati enim. Necessitatibus, similique cum mollitia unde quibusdam ex. Fuga reiciendis, deleniti blanditiis, suscipit numquam vitae neque sint repudiandae molestiae dolore nulla corporis accusamus alias harum. Quam iste asperiores ullam, odio harum ex consequatur, voluptate rem sequi molestias expedita voluptatem, autem ratione quos esse distinctio. Possimus nisi obcaecati molestias quibusdam asperiores corrupti reiciendis officiis commodi eligendi explicabo sapiente libero rerum ipsam repellendus dolores perspiciatis vel ullam saepe nobis repellat, autem suscipit doloremque quas? Earum magni consequuntur beatae quasi ut corporis perspiciatis? Repudiandae eum consequatur rerum commodi minus, aperiam molestias sit possimus illum quia doloremque vel reprehenderit ea est. Pariatur autem aperiam cum magnam, eligendi consequuntur quis assumenda quas facilis dolores necessitatibus, explicabo nobis, ad sed. Amet unde numquam neque id quae quaerat aperiam delectus iure ut praesentium totam nisi sint eum dicta a provident non hic ipsum ducimus accusantium, corporis veritatis suscipit? Voluptas tempore asperiores sunt, velit voluptates reiciendis illo explicabo labore dolor non aliquam consequuntur placeat suscipit! Dolores, nisi quisquam, illo aspernatur voluptas debitis magnam quia explicabo incidunt optio ratione assumenda fugit, qui sunt cupiditate modi nulla. Alias hic, accusamus enim cumque error inventore sint eligendi minima odio. Odio itaque enim minima veniam in blanditiis, tempora repudiandae tempore nam. Exercitationem modi eius temporibus officia recusandae ipsam ad eaque labore officiis accusamus perspiciatis quibusdam laudantium repudiandae, dolorum voluptates praesentium, repellat, unde quam maxime animi porro. Itaque nobis est iure quod architecto, placeat dolores et assumenda ad maxime labore quae velit corporis, ipsam nam, rerum culpa. Eveniet dolores, nesciunt magni excepturi hic animi quisquam. Minus voluptatum, nobis nam, assumenda modi fuga quidem quo ex veniam dolore saepe. Ullam at debitis provident saepe laboriosam maxime illum placeat nemo assumenda quia itaque alias ea cupiditate excepturi ad necessitatibus corporis sint quasi quis minima beatae quod, sequi quaerat perspiciatis. Animi corporis harum eveniet repudiandae. Veniam incidunt pariatur nemo maxime voluptatem eos, ducimus laborum commodi! Numquam cumque voluptates distinctio explicabo nam optio.
+                    
+                            </div>
+
+                            <!-- authors /post details starts -->
+                            <div class="my-6 py-4 border-t-2 border-b-2">
+                                <div class="flex">
+                                    <div class="author-avatar w-10">
+                                        <img src="https://www.kindpng.com/picc/m/78-785827_user-profile-avatar-login-account-male-user-icon.png" alt="author"
+                                            class="rounded-full">
+                                    </div>
+                                    <div class="author-bio mx-4 my-0">
+                                        <p class="text-lg font-medium leading-none">Gaurav Jaiswal</p>
+                                        <span class="text-xs leading-none">CEO at ABC.com and student at NCIT</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- authors /post details ends -->
+                            <!-- <p>comments here:-</p> -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- POPULAR POSTs on our Website starts -->
+                <section class="popular-recommendation my-2 md:pt-4 md:pb-8 border-b">
+
+                    <div class="relative chategory mb-4 inline-block md:my-6">
+                        <span
+                            class="footer-header cursor-pointer text-lg font-medium md:text-2xl hover:text-gray-700">Popular
+                            Posts</span>
+                    </div>
+                    <article>
+                        <article class="suggestion-img-holder overflow-auto py-2 my-4 md:pb-4">
+                            <div class="img-holder float-left w-1/2 md:w-2/6 mr-2 md:mr-4">
+                                <img alt="thumbnail image" src="post.thumbnail_img.url">
+                            </div>
+                            
+                            <div class="blog-intro-box block opacity-75">
+                                <p class="font-semibold md:text-xl md:font-bold lg:text-2xl">This is post 1</p>
+                                <p class="leading-relaxed tracking-wide">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae, ratione dolore! Alias impedit, excepturi temporibus dignissimos aliquid labore aut ratione dolorem quis esse id, fugiat sapiente provident. Quam veritatis temporibus nisi, dignissimos eligendi ipsam inventore beatae alias consequatur facere distinctio soluta natus dicta ipsa voluptatem veniam eius dolorum cum! Sunt dolorem impedit modi laborum qui aut doloremque doloribus incidunt nesciunt eaque amet tempore ducimus velit reprehenderit error sed aspernatur dolore, cum quidem tempora laudantium, explicabo commodi? Aliquid reprehenderit corporis, nesciunt officiis harum eos tenetur dolorem qui officia quibusdam quidem sint eveniet minima enim? Itaque reiciendis voluptate repudiandae asperiores molestias consectetur officia sed quod, deleniti eveniet quae optio facilis voluptas corporis quidem perspiciatis in et incidunt possimus minima! Iure omnis eligendi sed asperiores nihil dicta. In?.....
+
+                                    <a class="hover:underline" href="#">
+                                        <span class="font-medium "> read full story
+
+                                            <!--                                        right arrow-->
+                                            &#8594;
+                                        </span>
+                                    </a>
+                                </p>
+                            </div>
+                        </article>
+                    </article>
+                </section>
+
+
+                <!-- RECENT Reviews starts here  -->
+                <section class="recent-posts-wrapper md:py-8">
+
+                    <div class="relative inline-block">
+                        <span class="footer-header cursor-pointer font-medium md:text-2xl hover:text-gray-700">Recent
+                            Reviews</span>
+                    </div>
+
+                    <article class="overflow-x-scroll md:grid grid-cols-2 col-gap-4 md:py-4 ">
+
+                        <article class="suggestion-img-holder py-3 border-b ">
+                            <div class="img-holder float-right w-2/6">
+                                <img alt="thumbnail img" src="{{ post.thumbnail_img.url }}">
+                            </div>
+                            <a href="{{ post.get_absolute_url }}">
+                                <p class="font-semibold opacity-75 md:text-md lg:text-lg">
+                                    recent review 1
+                                </p>
+                            </a>
+                        </article>
+
+                    </article>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- review section ends  -->
+</section>
 {% endblock %}
