@@ -1,14 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    {% if movie_review_details %}
-        {{ movie_review_details.review | safe}}
-    {% endif %}
-</body>
-</html>
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block body %}
+<section class="movie-details">
+    <div class="parent my-6 grid grid-cols-6">
+        <div class="image col-span-2">
+            <img src="https://cdn.celpox.com/bby_uploads/media/5683391605141caabaf2d9da5ba2008f.jpg" alt=""
+                style="height: 390px; width: auto;">
+        </div>
+
+
+        <div class="movie-desc">
+            <div class="flex"> 
+                <p class="font-semibold leading-loose mr-2" style="font-size: 2rem;">Avatar</p>
+                <img src="{% static 'IMDB_Logo_2016.svg' %}" alt="" style="width: 3rem;">
+            </div>
+            <div>
+                <p class="text-xl font-medium">2022</p>
+                <p class="text-md leading-none">Action/Thriller</p>
+            </div>
+            <div class="flex my-8">
+                <div class="imdb-star flex">
+                    <img 
+                    src="{% static 'start.png' %}" 
+                    alt="star"
+                    style="width: 2rem;"
+                    title="IMDb rating"
+                    >
+                    <span class="ml-1">8.9</span>
+                </div>
+                <div class="rotten-tomato flex mx-2">
+                    <img 
+                    src="{% static 'rotten-tomato.png' %}" 
+                    alt="star"
+                    style="width: 2rem;"
+                    title="rotten tomato"
+                    >
+                    <span class="ml-1">8.9</span>
+                </div>
+                <div class="metacritic-score flex">
+                    <img 
+                    src="{% static 'metacritic-icon.svg' %}" 
+                    alt="star"
+                    style="width: 2rem;"
+                    title="Metacritic Score"
+                    >
+                    <span class="ml-1">79</span>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+<section class="review"></section>
+{% endblock %}
