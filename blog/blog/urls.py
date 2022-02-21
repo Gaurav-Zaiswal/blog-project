@@ -20,7 +20,7 @@ urlpatterns = [
     path('site/admin/', admin.site.urls),
     path('', include('posts.urls')),
     path('search/', search_movie),
-    path('movies/', include('movies.urls', namespace='movies')),
+    path('movies/', include('movies.urls')),
     path('author/', include('users.urls', namespace='users')),
     # path('author/ms/', include('movies.urls', namespace='movies')),
 

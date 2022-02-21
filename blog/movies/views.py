@@ -58,6 +58,7 @@ class GetMovieReviewList(ListView):
 
 class GetDetailedMovieReview(DetailView):
     model = MovieRating
+    pk_url_kwarg = 'id'
     template_name = "movies/movie_review_detail.html"
     context_object_name = 'movie_review_details'
 
