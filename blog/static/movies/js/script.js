@@ -1,6 +1,6 @@
 const imdbRating = document.getElementsByClassName("imdb-star");
 const metaScore = document.getElementsByClassName("meta-score");
-
+console.log(imdb_ids)
 let i = 0;
 
 imdb_ids.forEach(element => {
@@ -8,8 +8,10 @@ imdb_ids.forEach(element => {
     .then(
         response => response.json())
     .then( function(data){
+        // console.log(`imdb value is ${data['imDb']}`);
+        // console.log(`metacritic is ${data['metacritic']}`);
         imdbRating[i].innerText = data['imDb'];
-        // console.log(imdbRating);
         metaScore[i].innerText = data['metacritic'];
+        i++;
     })
 });

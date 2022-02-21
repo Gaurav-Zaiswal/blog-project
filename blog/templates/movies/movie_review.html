@@ -149,12 +149,12 @@
     // for each array value, call the imdb api to fetch ratings
     var imdb_ids = [
         {% for movie in recent_movies %}
-    {% if not forloop.first %}, {% endif %}
+            {% if not forloop.first %}, {% endif %}
 
-    {
-        imdb_id: "{{ movie.imdb_id }}"
-    }
-    {% endfor %}
+            {
+                imdb_id: "{{ movie.imdb_id }}"
+            }
+        {% endfor %}
     ];
 
     // console.log("imdb ids: ");
