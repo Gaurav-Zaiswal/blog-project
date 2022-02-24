@@ -63,7 +63,7 @@ class GetDetailedMovieReview(DetailView):
     model = MovieRating
     pk_url_kwarg = 'id'
     template_name = "movies/movie_review_detail.html"
-    context_object_name = 'movie_review_details'
+    context_object_name = 'movie_review_detail'
     
     def get_context_data(self, **kwargs):
         """
@@ -81,6 +81,8 @@ class GetDetailedMovieReview(DetailView):
         # add contexts
         context['latest_reviews'] = MovieRating.objects.all().order_by('-created_on')[:5]
         context['trending_posts'] = trending_posts
+        print(context)
+        return context  
 
 
 
