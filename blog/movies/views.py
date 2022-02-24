@@ -80,7 +80,7 @@ class GetDetailedMovieReview(DetailView):
 
         # add contexts
         context['latest_reviews'] = MovieRating.objects.all().order_by('-created_on')[:5]
-        context['Trending_posts'] = trending_posts
+        context['trending_posts'] = trending_posts
 
 
 
