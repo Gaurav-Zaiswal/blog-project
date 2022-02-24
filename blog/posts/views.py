@@ -1,5 +1,4 @@
 import datetime
-import pytz
 
 from django.utils import timezone
 from django.utils.timezone import make_aware
@@ -19,10 +18,9 @@ from django.http import HttpResponseRedirect
 from .models import Post, Category
 from .forms import CategoryForm, PostForm
 from users.models import Profile
-from blog.settings.base import TIME_ZONE
 
 
-now_today = datetime.datetime.now(tz=pytz.timezone(TIME_ZONE))
+now_today = datetime.datetime.now()
 fifteen_days_back = now_today - timezone.timedelta(days=15)
 one_month_back = now_today - timezone.timedelta(days=32)
 three_months_back = now_today - timezone.timedelta(days=100)
