@@ -153,7 +153,7 @@ class DetailPostView(DateDetailView):
             ).order_by('view_count')[:6]
 
             context['popular_posts'] = Post.objects.filter(status=1).order_by('view_count')[:4]
-            print(context['popular_posts'])
+            # print(context['popular_posts'])
             context['recent_posts'] = Post.objects.filter(status=1).order_by('-created_on')[:8]
             context_object_name = self.get_context_object_name(self.object)
             if context_object_name:

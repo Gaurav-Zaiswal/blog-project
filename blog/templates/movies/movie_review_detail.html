@@ -16,7 +16,7 @@
         <div class="movie-desc">
             <div class="name-year">
                 <div class="flex">
-                    <p class="font-semibold mr-2" style="font-size: 2rem;">{{ movie_review_detail.title }}</p>
+                    <p class="font-semibold mr-2" style="font-size: 2rem;">{{ movie_review_detail.movie_name }}</p>
                     <img src="{% static 'IMDB_Logo_2016.svg' %}" alt="" style="width: 2.5rem;">
                 </div>
                 <div class="mb-4 mt-2">
@@ -118,18 +118,20 @@
 
 
                             <div class="leading-loose tracking-wider font-priBody opacity-75 md:text-base">
-
+                                {{ movie_review_detail.review | safe }}
                             </div>
 
                             <!-- authors /post details starts -->
                             <div class="my-6 py-4 border-t-2 border-b-2">
                                 <div class="flex">
                                     <div class="author-avatar w-10">
-                                        <img src="https://www.kindpng.com/picc/m/78-785827_user-profile-avatar-login-account-male-user-icon.png"
+                                        <img src="{{ movie_review_detail.author.profile.image.url }}"
                                             alt="author" class="rounded-full">
                                     </div>
                                     <div class="author-bio mx-4 my-0">
-                                        <p class="text-lg font-medium leading-none">Gaurav Jaiswal</p>
+                                        <p class="text-lg font-medium leading-none">
+                                            {{ movie_review_detail.author.first_name }} {{ movie_review_detail.author.last_name }}
+                                        </p>
                                         <span class="text-xs leading-none">CEO at ABC.com and student at NCIT</span>
                                     </div>
                                 </div>
