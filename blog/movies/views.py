@@ -1,27 +1,30 @@
-import datetime
+import datetime, pytz
 import json
-from django.core import serializers
-from django.core.exceptions import ValidationError
-from django.forms.models import model_to_dict
-from django.http.response import JsonResponse
-from django.shortcuts import render
+
 from django.utils import timezone
 from django.utils.timezone import make_aware
-from django.views import View
-from django.views.generic import ListView, TemplateView, DetailView, DeleteView, UpdateView
-from django.views.generic.dates import DateDetailView
-from django.views.generic.edit import BaseDeleteView, CreateView
+from django.http.response import JsonResponse
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from django.http import Http404
 from django.utils.translation import gettext as _
 from django.urls import reverse_lazy
-from django.db.models import Q, fields
-from django.http import HttpResponseRedirect
+from django.db.models import Q
+# from django.conf import settings
 
 from .models import MovieRating
 from .forms import MovieReviewForm
+from posts.models import Post
+from posts.views import compute_trend
+from blog.settings.base import (TIME_ZONE)
+
+
+now_today = datetime.datetime.now(tz=pytz.timezone(TIME_ZONE))
+fifteen_days_back = now_today - timezone.timedelta(days=15)
+one_month_back = now_today - timezone.timedelta(days=32)
+three_months_back = now_today - timezone.timedelta(days=100)
 
 
 @method_decorator(login_required(login_url='/login'), name='dispatch')
@@ -61,23 +64,25 @@ class GetDetailedMovieReview(DetailView):
     pk_url_kwarg = 'id'
     template_name = "movies/movie_review_detail.html"
     context_object_name = 'movie_review_details'
-
-
-def get_address(request):
-    """sample for search_movie function"""
-    address = request.GET.get('address')
-
-    payload = []
-    if address:
-        fake_address_objects = FakeAddresses.objects.filter(address__icontains=address) # normal search
-        # fake_address_objects = FakeAddresses.search().query("match", address=address) # elasticsearch
-
-        for object in fake_address_objects:
-            payload.append(object.address)
     
+    def get_context_data(self, **kwargs):
+        """
+        return detailed post, recent reviews and, you may like
+        """
+        context = super().get_context_data(**kwargs) # get context
 
-        return JsonResponse({'status': 200, 'data': payload}) 
-    return JsonResponse({'status': 500})
+        #get trending posts lists
+        trending_posts = compute_trend(
+            Post.objects.filter(
+                Q(status=1) & Q(created_on__gte=one_month_back) & Q(created_on__lt=now_today)
+            )
+        )
+
+        # add contexts
+        context['latest_reviews'] = MovieRating.objects.all().order_by('-created_on')[:5]
+        context['Trending_posts'] = trending_posts
+
+
 
 
 def search_movie(request):
