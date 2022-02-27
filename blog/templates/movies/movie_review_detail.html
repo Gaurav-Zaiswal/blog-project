@@ -151,14 +151,14 @@
                     </div>
                     {% if latest_reviews %}
                     <article class="overflow-x-scroll md:grid grid-cols-2 col-gap-4 md:py-4 ">
-                        {% for review in latest_review %}
+                        {% for review in latest_reviews %}
                         <article class="suggestion-img-holder py-3 border-b ">
                             <div class="img-holder float-right w-2/6">
-                                <img alt="thumbnail img" src="{{ review.poster.url }}">
+                                <img alt="thumbnail img" src="{{ review.cover_img.url }}">
                             </div>
                             <a href="{% url 'movies:movie-review-detail' review.id %}">
                                 <p class="font-semibold opacity-75 md:text-md lg:text-lg">
-                                    {{ review.title }}
+                                    {{ review.movie_name }}
                                 </p>
                             </a>
                         </article>
