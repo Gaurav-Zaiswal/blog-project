@@ -154,7 +154,7 @@
                         {% for review in latest_reviews %}
                         <article class="suggestion-img-holder py-3 border-b ">
                             <div class="img-holder float-right w-2/6">
-                                <img alt="thumbnail img" src="{{ review.cover_img.url }}">
+                                <img alt="thumbnail img" src="{{ review.poster.url }}">
                             </div>
                             <a href="{% url 'movies:movie-review-detail' review.id %}">
                                 <p class="font-semibold opacity-75 md:text-md lg:text-lg">
