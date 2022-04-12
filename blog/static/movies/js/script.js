@@ -1,6 +1,7 @@
 const imdbRating = document.getElementsByClassName("imdb-star");
 const metaScore = document.getElementsByClassName("meta-score");
-console.log(imdb_ids)
+const releaseYear = document.getElementById()
+// console.log(imdb_ids)
 let i = 0;
 
 imdb_ids.forEach(element => {

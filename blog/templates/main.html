@@ -396,10 +396,9 @@
                 return parsedResult.movie_name
             },
             onSubmit: result => {
-                console.log(result);
                 const parsedResult = JSON.parse(result.toString());
                 // console.log(parsedResult)
-                window.open(`/movies/${parsedResult.slug}`);
+                window.open(`/movies/${parsedResult.id}`);
             }
         })
     </script>

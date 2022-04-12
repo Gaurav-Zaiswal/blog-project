@@ -81,7 +81,7 @@ class GetDetailedMovieReview(DetailView):
         # add contexts
         context['latest_reviews'] = MovieRating.objects.all().order_by('-created_on')[:5]
         context['trending_posts'] = trending_posts
-        print(context)
+        # print(context)
         return context  
 
 
@@ -91,7 +91,7 @@ def search_movie(request):
     movie_name = request.GET.get('movie_name')
     payload=[]
     if movie_name:
-        qs = MovieRating.objects.filter(movie_name__icontains=movie_name).values('movie_name', 'release_date', 'slug')
+        qs = MovieRating.objects.filter(movie_name__icontains=movie_name).values('movie_name', 'release_date', 'id')
         for query in qs:
             query['release_date'] = query['release_date'].year
 
