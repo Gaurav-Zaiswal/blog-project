@@ -211,4 +211,14 @@
     </div>
     <!-- review section ends  -->
 </section>
+
+<script>
+    // store imdb_id in an array 
+    // for each array value, call the imdb api to fetch ratings
+    var imdb_id= "{{movie_review_detail.imdb_id }}"
+
+</script>
+
+<script src="{% static 'movies/js/review-detail.js' %}"></script>
+
 {% endblock body %}
