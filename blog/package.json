@@ -7,7 +7,6 @@
     "start-dev": "tailwindcss build static/posts/css/styles.css -o static/posts/css/main.css",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-prod": "NODE_ENV=production tailwindcss build static/posts/css/styles.css -o static/posts/css/main.css"
-
   },
   "author": "",
   "license": "ISC",
